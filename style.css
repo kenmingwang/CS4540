@@ -1,0 +1,169 @@
+.header {
+    background-color: #be020e;
+    padding: 13px;
+    text-align: left;
+}
+
+.footer {
+    height: 100px;
+    background-color: rgb(44, 43, 43);
+    padding: 20px;
+    text-align: left;
+}
+
+.footertext {
+    padding-top: 10px;
+    padding-left: 395px;
+    margin: 2px;
+    color: white;
+    font-family: "Times New Roman", Times, serif;
+}
+
+
+/* Add a black background color to the top navigation */
+
+.nav {
+    background-color: rgb(51, 51, 51);
+    padding: 7px;
+}
+
+
+/* Below Code from https://www.w3schools.com/howto/howto_js_topnav.asp */
+
+.nav a {
+    color: #f2f2f2;
+    padding: 3px 3px;
+    text-decoration: none;
+}
+
+.left {
+    text-align: left;
+    font-size: 12px;
+    padding-bottom: 3px;
+    padding-left: 415px;
+}
+
+.right {
+    display: inline;
+    color: #f2f2f2;
+    font-size: 12px;
+    padding-bottom: 3px;
+    padding-left: 785px;
+}
+
+
+/* Above Code from https://www.w3schools.com/howto/howto_js_topnav.asp */
+
+#logo {
+    padding-left: 400px;
+    margin-bottom: -15px;
+    height: 50px;
+    width: 50px;
+}
+
+.layout {
+    width: 1060px;
+    margin: 0 auto;
+}
+
+#content {
+    height: 500px;
+}
+
+h1 {
+    display: inline;
+    white-space: nowrap;
+    color: white;
+    font-family: "Times New Roman", Times, serif;
+}
+
+h2 {
+    text-align: center;
+    margin-top: 40px;
+    color: rgb(78, 72, 72);
+    font-family: "Times New Roman", Times, serif;
+}
+
+.btn {
+    display: inline-block;
+    padding: 4px 6px;
+    color: #fff;
+    background-color: #72b890;
+    border-radius: 3px;
+}
+
+.btn:hover {
+    opacity: 0.7;
+}
+
+
+/* Table CSS */
+
+table {
+    margin-top: 10px;
+}
+
+.display {
+    border-collapse: collapse;
+    border-spacing: 0;
+    width: 100%;
+    border: none;
+}
+
+.display th {
+    background-color: #fff;
+    color: #000;
+    padding: 8px;
+    font-weight: bold;
+}
+
+.display tr {
+    border-bottom: 1px solid #ddd;
+    text-align: left;
+}
+
+.display tr:nth-child(even) {
+    background-color: #f1f1f1;
+}
+
+.display td {
+    padding: 8px;
+    width: 20px;
+}
+
+.notSubmited {
+    color: grey;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+}
+
+.badge {
+    background-color: rgb(118, 138, 119);
+    border: none;
+    border-radius: 5px;
+    color: white;
+    padding: 5px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.warning {
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    padding: 1px 1px;
+    padding-left: 4px;
+    padding-right: 4px;
+    margin: 2px;
+    display: inline;
+    border-radius: 3px;
+    background-color: rgb(233, 95, 31);
+}
+
+.warning.completed {
+    background-color: rgb(2, 139, 59);
+}
