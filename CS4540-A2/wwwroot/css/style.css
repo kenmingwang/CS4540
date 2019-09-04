@@ -1,5 +1,5 @@
 body {
-   background-color:#F2F2F3;
+    background-color: #F2F2F3;
 }
 
 /* Header style */
@@ -10,12 +10,11 @@ body {
 }
 
 .header-text {
-    font-size:35px;
+    font-size: 35px;
     font-family: "Times New Roman", Times, serif;
     color: white;
-    font-weight:bold;
-    position:relative;
-    
+    font-weight: bold;
+    position: relative;
 }
 
 .logo-left {
@@ -27,7 +26,7 @@ body {
 .wrapper {
     width: 90%;
     margin: 0 auto;
-    max-width: 1440px;
+    max-width: 1280px;
     position: relative;
 }
 
@@ -36,7 +35,7 @@ body {
 .wrapper-nav {
     width: 90%;
     margin: -5px auto;
-    max-width: 1400px;
+    max-width: 1250px;
     position: relative;
     padding: -20px;
 }
@@ -47,14 +46,63 @@ body {
 }
 
 .nav-right {
-    float:right;
+    float: right;
     width: 50%;
-    text-align:right;
+    text-align: right;
 }
 
 .navbar-nav {
     padding: -10px;
 }
+
+
+
+/* Search Box Modified based on https://www.youtube.com/watch?v=v1PeTDrw6OY&t=41s */
+.search-box {
+    background: #79161d;
+    height: 30px;
+    width: 20%;
+    border-radius: 30px;
+    position: relative;
+    bottom: -30px;
+    right: 20px;
+    float: right;
+}
+
+.search-btn {
+    color: #e84118;
+    float: right;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #2f3640;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.4s;
+    text-decoration: none;
+}
+
+.search-txt {
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding-left: 15px;
+    color: white;
+    font-size: 12px;
+    transition: 0.4s;
+    line-height: 30px;
+}
+
+.search-box:hover > .search-txt {
+    width: 80%;
+}
+
+.search-box:hover > .search-btn {
+    background: white;
+}
+
 
 /* https://stackoverflow.com/questions/33911049/btn-xs-no-longer-a-valid-option-in-bootstrap-4 */
 .btn-group-xs > .btn, .btn-xxs {
@@ -63,6 +111,7 @@ body {
     line-height: .5;
     border-radius: .2rem;
 }
+
 
 .btn-group-xs > .btn, .btn-xs {
     padding: .25rem .4rem;
