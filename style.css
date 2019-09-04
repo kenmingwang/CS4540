@@ -8,11 +8,10 @@
 }
 
 .footer {
-    height: 50px;
+    height: 50%;
     background-color: rgb(44, 43, 43);
     padding: 20px;
-    text-align: left;
-    position: fixed;
+    text-align: center;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -20,7 +19,6 @@
 
 .footertext {
     padding-top: 10px;
-    padding-left: 395px;
     margin: 2px;
     color: white;
     font-family: "Times New Roman", Times, serif;
@@ -31,11 +29,9 @@
 
 .nav {
     background-color: rgb(51, 51, 51);
-    padding: 7px;
+    padding: 10px;
+    width: 100%;
 }
-
-
-/* Below Code from https://www.w3schools.com/howto/howto_js_topnav.asp */
 
 .nav a {
     color: #f2f2f2;
@@ -45,31 +41,28 @@
 
 .left {
     text-align: left;
-    font-size: 12px;
+    font-size: 13px;
     padding-bottom: 3px;
-    padding-left: 415px;
+    padding-left: 215px;
 }
 
 .right {
     display: inline;
     color: #f2f2f2;
-    font-size: 12px;
+    font-size: 15px;
     padding-bottom: 3px;
-    padding-left: 785px;
+    padding-left: 720px;
 }
 
-
-/* Above Code from https://www.w3schools.com/howto/howto_js_topnav.asp */
-
 #logo {
-    padding-left: 400px;
+    padding-left: 200px;
     margin-bottom: -15px;
     height: 50px;
     width: 50px;
 }
 
 .layout {
-    width: 1060px;
+    width: 70%;
     margin: 0 auto;
 }
 
@@ -153,6 +146,10 @@ table {
     text-decoration: none;
 }
 
+.red-font {
+    color: rgb(194, 5, 5);
+}
+
 .btn {
     background-color: rgb(118, 138, 119);
     border: none;
@@ -184,4 +181,8 @@ table {
 
 .warning.completed {
     background-color: rgb(2, 139, 59);
+}
+
+.progress-bar {
+    width: 100%
 }
