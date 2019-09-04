@@ -1,0 +1,432 @@
+﻿@{ ViewData["Title"] = "Course"; }
+
+<div >
+    <h1 class="display-4">Your LOS Courses</h1>
+</div>
+<div id="accordion">
+    <div class="card">
+        <button id="headingOne" class="card-header btn btn-lg " data-toggle="collapse" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+            <span class="table-header-color">CS-4540-F19</span> <span class="badge badge-pill badge-warning">Incomplete</span>
+        </button>
+
+        <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Learning Outcome</th>
+                        <th scope="col">
+                            Evaluation Metric
+                            <button class="btn btn btn-default bg-light btn-xs btn-edit">Edit</button>
+                        </th>
+                        <th scope="col">
+                            Examples
+                            <button class="btn btn btn-default bg-light btn-xs  btn-edit">Edit</button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Master HTML</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">HTML</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master CSS</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">CSS</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs  disable" href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs disabled" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master BootStrap</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">BootStrap</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs disable" href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs disabled" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master JavaScript</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">JavaScript</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs disabled" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master MVC</td>
+                        <td><a class="notSubmited" href="~/files/DummyAssgn.pdf">MVC</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs disabled" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master Visual Studio</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">Visual Studio</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs disabled" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master Mysql</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">Mysql</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs disabled" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master Deployment To Cloud</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">Cloud</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs disabled" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master Full Stack</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">Final Project</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs disabled" href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs disabled" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs disabled" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="card">
+        <button id="headingTwo" class="card-header btn btn-lg " data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+            <span class="table-header-color">CS-4540-S19</span> <span class="badge badge-pill badge-success">Completed</span>
+        </button>
+
+        <div id="collapseTwo" class="collapse hide" aria-labelledby="headingTwo" data-parent="#accordion">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Learning Outcome</th>
+                        <th scope="col">
+                            Evaluation Metric
+                            <button class="btn btn btn-default bg-light btn-xs btn-edit">Edit</button>
+                        </th>
+                        <th scope="col">
+                            Examples
+                            <button class="btn btn btn-default bg-light btn-xs  btn-edit">Edit</button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Master HTML</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">HTML</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master CSS</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">CSS</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master BootStrap</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">BootStrap</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master JavaScript</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">JavaScript</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master MVC</td>
+                        <td><a class="notSubmited" href="~/files/DummyAssgn.pdf">MVC</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master Visual Studio</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">Visual Studio</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master Mysql</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">Mysql</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master Deployment To Cloud</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">Cloud</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master Full Stack</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">Final Project</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card">
+        <button id="headingThree" class="card-header btn btn-lg " data-toggle="collapse" data-target="#collapseThree" aria-expanded="true" aria-controls="collapseThree">
+            <span class="table-header-color">CS-4540-F18</span> <span class="badge badge-pill badge-success">Completed</span>
+        </button>
+
+        <div id="collapseThree" class="collapse hide" aria-labelledby="headingTwo" data-parent="#accordion">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Learning Outcome</th>
+                        <th scope="col">
+                            Evaluation Metric
+                            <button class="btn btn btn-default bg-light btn-xs btn-edit">Edit</button>
+                        </th>
+                        <th scope="col">
+                            Examples
+                            <button class="btn btn btn-default bg-light btn-xs  btn-edit">Edit</button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Master HTML</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">HTML</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master CSS</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">CSS</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master BootStrap</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">BootStrap</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master JavaScript</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">JavaScript</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master MVC</td>
+                        <td><a class="notSubmited" href="~/files/DummyAssgn.pdf">MVC</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master Visual Studio</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">Visual Studio</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master Mysql</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">Mysql</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master Deployment To Cloud</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">Cloud</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master Full Stack</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">Final Project</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="card">
+        <button id="headingFour" class="card-header btn btn-lg " data-toggle="collapse" data-target="#collapseFour" aria-expanded="true" aria-controls="collapseFour">
+            <span class="table-header-color">CS-4540-S18</span> <span class="badge badge-pill badge-success">Completed</span>
+        </button>
+
+        <div id="collapseFour" class="collapse hide" aria-labelledby="headingTwo" data-parent="#accordion">
+            <table class="table table-hover table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Learning Outcome</th>
+                        <th scope="col">
+                            Evaluation Metric
+                            <button class="btn btn btn-default bg-light btn-xs btn-edit">Edit</button>
+                        </th>
+                        <th scope="col">
+                            Examples
+                            <button class="btn btn btn-default bg-light btn-xs  btn-edit">Edit</button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Master HTML</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">HTML</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master CSS</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">CSS</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master BootStrap</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">BootStrap</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master JavaScript</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">JavaScript</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master MVC</td>
+                        <td><a class="notSubmited" href="~/files/DummyAssgn.pdf">MVC</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master Visual Studio</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">Visual Studio</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master Mysql</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">Mysql</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master Deployment To Cloud</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">Cloud</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Master Full Stack</td>
+                        <td><a href="~/files/DummyAssgn.pdf" target="_blank">Final Project</a></td>
+                        <td>
+                            <a class="btn btn-info btn-xs " href="~/files/Dummy.html">Good</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Average</a>
+                            <a class="btn btn-info btn-xs" href="~/files/Dummy.html">Poor</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
