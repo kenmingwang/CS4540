@@ -54,8 +54,9 @@ namespace CS4540_A2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LId,Name,Description,CourseCid")] LearningOutcome learningOutcome)
+        public async Task<IActionResult> Create([Bind("LId,Name,Description")] LearningOutcome learningOutcome)
         {
+            Console.WriteLine(learningOutcome);
             if (ModelState.IsValid)
             {
                 

@@ -24,12 +24,58 @@ namespace CS4540_A2.Controllers
             return View(await _context.Courses.ToListAsync());
         }
 
-        // GET: Courses/Details?Dept=CS&Number=4540&Semester=FA&Year=2019
-        public async Task<IActionResult> Details(string Dept, int Number, string Semester, int Year)
+        // GET: Courses/Details?cId=1
+        public async Task<IActionResult> Details(int? cId)
         {
+            if (cId == null)
+            {
+                return NotFound();
+            }
+
             var course = await _context.Courses
                 .FirstOrDefaultAsync(m => 
-                m.Dept == Dept && m.Number == Number && m.Semester == Semester && m.Year == Year );
+               m.CId == cId);
+
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            return View(course);
+        }
+
+        // GET: Courses/Details?cId=1
+        public async Task<IActionResult> DetailsControllerGenerateHTML(int cId)
+        {
+            var course = await _context.Courses
+                .FirstOrDefaultAsync(m =>
+               m.CId == cId);
+
+            if (course == null)
+            {
+                return NotFound();
+            }
+
+            string HTML =
+                          "<h3>" + "CId: " + course.CId + "</h3>"
+                        + "<h3>" + "Dept: " + course.Dept + "</h3>"
+                        + "<h3>" + "Number: " + course.Number + "</h3>"
+                        + "<h3>" + "Semester: " + course.Semester + "</h3>"
+                        + "<h3>" + "Year: " + course.Year + "</h3>"
+                        + "<h3>" + "Name: " + course.Name + "</h3>"
+                        + "<h3>" + "Description: " + course.Description + "</h3>";
+
+            ViewData["HTML"] = HTML;
+
+            return View(course);
+        }
+
+        // GET: Courses/Details?cId=1
+        public async Task<IActionResult> DetailsViewGenerateHTML(int cId)
+        {
+            var course = await _context.Courses
+                .FirstOrDefaultAsync(m =>
+               m.CId == cId);
 
             if (course == null)
             {
