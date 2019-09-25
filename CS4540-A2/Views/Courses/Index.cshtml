@@ -1,4 +1,6 @@
-﻿@model IEnumerable<CS4540_A2.Models.Course>
+﻿<!-- Name: Ken Wang
+     UID: u1193853 -->
+@model IEnumerable<CS4540_A2.Models.Course>
 
 @{
     ViewData["Title"] = "Index";
@@ -34,34 +36,35 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Dept)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Number)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Semester)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Year)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.CId">Edit</a> |
-                <!-- <a asp-action="Details" asp-route-cId="@item.CId">Details</a> | -->
-                <a asp-action="DetailsControllerGenerateHTML" asp-route-cId="@item.CId">ControllerGenerateHTML</a>|
-                <a asp-action="DetailsViewGenerateHTML" asp-route-cId="@item.CId">ViewGenerateHTML</a>|
-                <a asp-action="Delete" asp-route-id="@item.CId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Dept)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Number)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Semester)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Year)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.CId">Edit</a> |
+                    <!-- <a asp-action="Details" asp-route-cId="@item.CId">Details</a> | -->
+                    <a asp-action="DetailsControllerGenerateHTML" asp-route-cId="@item.CId">ControllerGenerateHTML</a>|
+                    <a asp-action="DetailsViewGenerateHTML" asp-route-cId="@item.CId">ViewGenerateHTML</a>|
+                    <a asp-action="Delete" asp-route-id="@item.CId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

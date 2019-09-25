@@ -1,3 +1,7 @@
+/* 
+ * Name:Ken Wang
+ * uID: u1193853
+ */
 using System;
 
 namespace CS4540_A2.Models

@@ -1,20 +1,22 @@
-﻿@model CS4540_A2.Models.Course
+﻿<!-- Name: Ken Wang
+     UID: u1193853 -->
+@model CS4540_A2.Models.Course
 
 @{
     ViewData["Title"] = "Details";
 }
 
-    <div>
-        <h1 class="display-4">
-            @Html.DisplayFor(model => model.Dept) -
-            @Html.DisplayFor(model => model.Number) -
-            @Html.DisplayFor(model => model.Semester) -
-            @Html.DisplayFor(model => model.Year)
-        </h1>
-        <h1 class="display-4">
-            @Html.DisplayFor(model => model.Name)
-        </h1>
-    </div>
+<div>
+    <h1 class="display-4">
+        @Html.DisplayFor(model => model.Dept) -
+        @Html.DisplayFor(model => model.Number) -
+        @Html.DisplayFor(model => model.Semester) -
+        @Html.DisplayFor(model => model.Year)
+    </h1>
+    <h1 class="display-4">
+        @Html.DisplayFor(model => model.Name)
+    </h1>
+</div>
 
 <div>
     <hr />

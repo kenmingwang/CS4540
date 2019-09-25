@@ -1,15 +1,25 @@
-﻿@model CS4540_A2.Models.Course
+﻿<!-- Name: Ken Wang
+     UID: u1193853 -->
+@model CS4540_A2.Models.Course
 
 @{
     ViewData["Title"] = "Details";
 }
-    <h1>ViewControllerGenerateHTML</h1>
-    <div>
-        <h3>@Html.DisplayNameFor(model => model.CId): @Html.DisplayFor(model => model.CId) </h3>
-        <h3>@Html.DisplayNameFor(model => model.Dept): @Html.DisplayFor(model => model.Dept) </h3>
-        <h3>@Html.DisplayNameFor(model => model.Number): @Html.DisplayFor(model => model.Number) </h3>
-        <h3>@Html.DisplayNameFor(model => model.Semester): @Html.DisplayFor(model => model.Semester) </h3>
-        <h3>@Html.DisplayNameFor(model => model.Year): @Html.DisplayFor(model => model.Year) </h3>
-        <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name) </h3>
-        <h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description) </h3>
-    </div>
+<h1>ViewControllerGenerateHTML</h1>
+<div>
+    <h3>@Html.DisplayNameFor(model => model.CId): @Html.DisplayFor(model => model.CId) </h3>
+    <h3>@Html.DisplayNameFor(model => model.Dept): @Html.DisplayFor(model => model.Dept) </h3>
+    <h3>@Html.DisplayNameFor(model => model.Number): @Html.DisplayFor(model => model.Number) </h3>
+    <h3>@Html.DisplayNameFor(model => model.Semester): @Html.DisplayFor(model => model.Semester) </h3>
+    <h3>@Html.DisplayNameFor(model => model.Year): @Html.DisplayFor(model => model.Year) </h3>
+    <h3>@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name) </h3>
+    <h3>@Html.DisplayNameFor(model => model.Description): @Html.DisplayFor(model => model.Description) </h3>
+    <br />
+    <h2>LOS:</h2>
+    @foreach (LearningOutcome lo in Model.LOS)
+    {
+        <h3>@lo.Name</h3>
+    }
+
+
+</div>

@@ -65,19 +65,16 @@
                             Views
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="/DCV">Department Chair View</a>
-                            <a class="dropdown-item" href="/Admin">Admins View</a>
-                            <a class="dropdown-item" href="/Course">Course View</a>
+                            <a class="dropdown-item" href="/Home">Department Chair View</a>
+                            <a class="dropdown-item" href="/Admin">Admins View (Static)</a>
+                           <!-- <a class="dropdown-item" href="/Course">Course View (Static)</a> -->
                         </div>
                     </li>
                 </ul>
             </div>
             <div class="nav-right">
                 <span class="navbar-text">
-                    Hello Professor/Admin/DeparmentChair: <a style="color:orangered; padding-right:2px;" href="#">u1193853</a>
-                    <button type="button" class="btn btn-default btn-xxs bg-light">
-                        <i class="fas fa-sign-out-alt fa-xs"></i> Logout
-                    </button>
+                    <partial name="_LoginPartial" />
                 </span>
             </div>
         </div>

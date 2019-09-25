@@ -1,4 +1,8 @@
-﻿using System;
+﻿/* 
+ * Name:Ken Wang
+ * uID: u1193853
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -6,16 +10,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CS4540_A2.Models;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace CS4540_A2.Controllers
 {
+    [Authorize(Roles = "Admin,Instructor,DepartmentChair")]
     public class CoursesController : Controller
     {
         private readonly LOSContext _context;
+        private readonly UserManager<IdentityUser> _userManager;
 
-        public CoursesController(LOSContext context)
+        public CoursesController(LOSContext context, UserManager<IdentityUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
         }
 
         // GET: Courses
@@ -25,27 +35,7 @@ namespace CS4540_A2.Controllers
         }
 
         // GET: Courses/Details?cId=1
-        public async Task<IActionResult> Details(int? cId)
-        {
-            if (cId == null)
-            {
-                return NotFound();
-            }
-
-            var course = await _context.Courses
-                .FirstOrDefaultAsync(m => 
-               m.CId == cId);
-
-            if (course == null)
-            {
-                return NotFound();
-            }
-
-            return View(course);
-        }
-
-        // GET: Courses/Details?cId=1
-        public async Task<IActionResult> DetailsControllerGenerateHTML(int cId)
+        public async Task<IActionResult> Details(int cId)
         {
             var course = await _context.Courses
                 .FirstOrDefaultAsync(m =>
@@ -56,31 +46,23 @@ namespace CS4540_A2.Controllers
                 return NotFound();
             }
 
-            string HTML =
-                          "<h3>" + "CId: " + course.CId + "</h3>"
-                        + "<h3>" + "Dept: " + course.Dept + "</h3>"
-                        + "<h3>" + "Number: " + course.Number + "</h3>"
-                        + "<h3>" + "Semester: " + course.Semester + "</h3>"
-                        + "<h3>" + "Year: " + course.Year + "</h3>"
-                        + "<h3>" + "Name: " + course.Name + "</h3>"
-                        + "<h3>" + "Description: " + course.Description + "</h3>";
-
-            ViewData["HTML"] = HTML;
-
-            return View(course);
-        }
-
-        // GET: Courses/Details?cId=1
-        public async Task<IActionResult> DetailsViewGenerateHTML(int cId)
-        {
-            var course = await _context.Courses
-                .FirstOrDefaultAsync(m =>
-               m.CId == cId);
-
-            if (course == null)
+            // Email in this course matches the current login's email 
+            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User));
+            if(user == null)
             {
                 return NotFound();
             }
+            var userEmail = await _userManager.GetEmailAsync(user);
+            var courseEmail = course.Email;
+
+            if(userEmail != courseEmail)
+            {
+                Console.WriteLine(userEmail);
+                Console.WriteLine(courseEmail);
+                return View("../Shared/AccessDenied");
+            }
+            var LOS = _context.LOS.Where(m => m.CourseCId == cId).ToList();
+            course.LOS = LOS;
 
             return View(course);
         }

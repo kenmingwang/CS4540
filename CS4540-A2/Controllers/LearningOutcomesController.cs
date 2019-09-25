@@ -1,4 +1,8 @@
-﻿using System;
+﻿/* 
+ * Name:Ken Wang
+ * uID: u1193853
+ */
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -21,7 +25,8 @@ namespace CS4540_A2.Controllers
         // GET: LearningOutcomes
         public async Task<IActionResult> Index()
         {
-            return View(await _context.LOS.ToListAsync());
+            var lOSContext = _context.LOS.Include(l => l.Course);
+            return View(await lOSContext.ToListAsync());
         }
 
         // GET: LearningOutcomes/Details/5
@@ -33,6 +38,7 @@ namespace CS4540_A2.Controllers
             }
 
             var learningOutcome = await _context.LOS
+                .Include(l => l.Course)
                 .FirstOrDefaultAsync(m => m.LId == id);
             if (learningOutcome == null)
             {
@@ -45,7 +51,7 @@ namespace CS4540_A2.Controllers
         // GET: LearningOutcomes/Create
         public IActionResult Create()
         {
-            ViewData["CId"] = new SelectList(_context.Courses, "CId", "CId");
+            ViewData["CourseCId"] = new SelectList(_context.Courses, "CId", "CId");
             return View();
         }
 
@@ -54,18 +60,22 @@ namespace CS4540_A2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("LId,Name,Description")] LearningOutcome learningOutcome)
-        {
-            Console.WriteLine(learningOutcome);
+        public async Task<IActionResult> Create([Bind("LId,Name,Description,CourseCId")] LearningOutcome learningOutcome)
+        {   
+            
             if (ModelState.IsValid)
             {
-                
                 _context.Add(learningOutcome);
-                await _context.SaveChangesAsync();
+                var course = await _context.Courses
+                    .FirstOrDefaultAsync(m =>
+                    m.CId == learningOutcome.CourseCId);
+                course.LOS.Add(learningOutcome);
+
+
+                    await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-
-            ViewData["CId"] = new SelectList(_context.Courses, "CId", "CId", learningOutcome.CourseCId);
+            ViewData["CourseCId"] = new SelectList(_context.Courses, "CId", "CId", learningOutcome.CourseCId);
             return View(learningOutcome);
         }
 
@@ -82,6 +92,7 @@ namespace CS4540_A2.Controllers
             {
                 return NotFound();
             }
+            ViewData["CourseCId"] = new SelectList(_context.Courses, "CId", "Dept", learningOutcome.CourseCId);
             return View(learningOutcome);
         }
 
@@ -90,7 +101,7 @@ namespace CS4540_A2.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("LId,Name,Description")] LearningOutcome learningOutcome)
+        public async Task<IActionResult> Edit(int id, [Bind("LId,Name,Description,CourseCId")] LearningOutcome learningOutcome)
         {
             if (id != learningOutcome.LId)
             {
@@ -117,6 +128,7 @@ namespace CS4540_A2.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["CourseCId"] = new SelectList(_context.Courses, "CId", "Dept", learningOutcome.CourseCId);
             return View(learningOutcome);
         }
 
@@ -129,6 +141,7 @@ namespace CS4540_A2.Controllers
             }
 
             var learningOutcome = await _context.LOS
+                .Include(l => l.Course)
                 .FirstOrDefaultAsync(m => m.LId == id);
             if (learningOutcome == null)
             {

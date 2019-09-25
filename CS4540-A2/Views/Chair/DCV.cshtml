@@ -3,6 +3,17 @@
 
 @{ ViewData["Title"] = "Deparment Chair"; }
 
+<script type="text/javascript">
+    function ramdomProgress() {
+        var x = document.getElementsByClassName('progress-bar');
+        var i;
+        for (i = 0; i < x.length; i++) {
+            x.item(i).setAttribute('style', 'width:' + Math.random() * 100 + '%');
+        }
+
+    }
+</script>
+
 <div>
     <h1 class="display-4">CS Deparment LOS Courses</h1>
 </div>
@@ -26,62 +37,36 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><a href="~/files/DummyClass.html">CS4540-Fall-19</a></td>
-                        <td><a href="~/files/DummyProfessor.html" target="_blank">Jim Germain</a></td>
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+                    @foreach (Course course in @ViewData["Courses"] as IEnumerable<Course>)
+                    {
+                        <tr>
+                            <td>
+                                <a asp-controller="Courses" asp-action="DetailsViewGenerateHTML" asp-route-cId="@course.CId">
+                                    @Html.DisplayFor(modelItem => course.Dept) -
+                                    @Html.DisplayFor(modelItem => course.Number) -
+                                    @Html.DisplayFor(modelItem => course.Semester) -
+                                    @Html.DisplayFor(modelItem => course.Year)
+                                </a>
+                            </td>
+                            <td><a href="~/files/DummyProfessor.html" target="_blank">Jim Germain</a></td>
+                            <td>
+                                <div class="progress">
+                                    <div id="progress-bar" class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
+                                    </div>
                                 </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><a href="~/files/DummyClass.html">CS4400-Fall-19</a></td>
-                        <td><a href="~/files/DummyProfessor.html" target="_blank">Danny Kopta</a></td>
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 20%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><a href="~/files/DummyClass.html">CS3500-Fall-19</a></td>
-                        <td><a href="~/files/DummyProfessor.html" target="_blank">Joe Harrison</a></td>
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 50%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-                                </div>
-                            </div>
+                            </td>
 
+                        </tr>
+                    }
 
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><a href="~/files/DummyClass.html">CS3505-Fall-19</a></td>
-                        <td><a href="~/files/DummyProfessor.html" target="_blank">David Johnson</a></td>
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 30%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td><a href="~/files/DummyClass.html">CS5530-Fall-19</a></td>
-                        <td><a href="~/files/DummyProfessor.html" target="_blank">Danny Kopta</a></td>
-                        <td>
-                            <div class="progress">
-                                <div class="progress-bar progress-bar-striped" role="progressbar" style="width: 50%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">
-                                </div>
-                            </div>
-                        </td>
-                    </tr>
                 </tbody>
+
             </table>
         </div>
     </div>
+    <script type="text/javascript">
+        ramdomProgress();
+    </script>
 
     <div class="card">
         <button id="headingTwo" class="card-header btn btn-lg " data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
@@ -234,3 +219,8 @@
         </div>
     </div>
 </div>
+
+<script type="text/javascript">
+    myfunction();
+</script>
+

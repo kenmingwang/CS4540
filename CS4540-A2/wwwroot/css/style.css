@@ -71,6 +71,10 @@ main {
     padding: -10px;
 }
 
+.navbar-nav-login {
+    margin: -8px 2px;
+}
+
 
 
 /* Search Box Modified based on https://www.youtube.com/watch?v=v1PeTDrw6OY&t=41s */

@@ -1,4 +1,6 @@
-﻿@model IEnumerable<CS4540_A2.Models.LearningOutcome>
+﻿<!-- Name: Ken Wang
+     UID: u1193853 -->
+@model IEnumerable<CS4540_A2.Models.LearningOutcome>
 
 @{
     ViewData["Title"] = "Index";
@@ -18,25 +20,31 @@
             <th>
                 @Html.DisplayNameFor(model => model.Description)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Course)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.LId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.LId">Details</a> |
-                <a asp-action="Details" asp-route-id="@item.LId">Details</a>
-                <a asp-action="Delete" asp-route-id="@item.LId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Description)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Course.Dept)
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.LId">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.LId">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.LId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
