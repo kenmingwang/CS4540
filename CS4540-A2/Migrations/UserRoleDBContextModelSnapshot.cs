@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace CS4540_A2.Migrations.UserRoleDB
+namespace CS4540A2.Migrations
 {
     [DbContext(typeof(UserRoleDBContext))]
     partial class UserRoleDBContextModelSnapshot : ModelSnapshot

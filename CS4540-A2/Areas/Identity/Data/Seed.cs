@@ -31,7 +31,7 @@ namespace CS4540_A2.Areas.Identity.Data
 
             IdentityUser Admin = new IdentityUser
             {
-                UserName = "admin_erin@cs.utah.edu",
+                UserName = "erin_parker",
                 Email = "admin_erin@cs.utah.edu"
             };
 
@@ -50,17 +50,17 @@ namespace CS4540_A2.Areas.Identity.Data
             IdentityUser[] Instructors = {
                 new IdentityUser
                 {
-                    UserName = "professor_jim@cs.utah.edu",
+                    UserName = "jim_germain",
                     Email = "professor_jim@cs.utah.edu"
                 },
                 new IdentityUser
                 {
-                    UserName = "professor_marry@cs.utah.edu",
-                    Email = "professor_marry@cs.utah.edu"
+                    UserName = "mary_hall",
+                    Email = "professor_mary@cs.utah.edu"
                 },
                 new IdentityUser
                 {
-                    UserName = "professor_danny@cs.utah.edu",
+                    UserName = "danny_kopta",
                     Email = "professor_danny@cs.utah.edu"
                 }
             };
@@ -82,7 +82,7 @@ namespace CS4540_A2.Areas.Identity.Data
 
             IdentityUser Chair = new IdentityUser
             {
-                UserName = "chair_whitaker@cs.utah.edu",
+                UserName = "ross_whitaker",
                 Email = "chair_whitaker@cs.utah.edu"
             };
             user = await UserManager.FindByEmailAsync(Chair.Email);

@@ -7,17 +7,17 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace CS4540_A2.Migrations
+namespace CS4540A2.Migrations
 {
     [DbContext(typeof(LOSContext))]
-    [Migration("20190924103510_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20190925211347_initialcreate")]
+    partial class initialcreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.2.6-servicing-10079")
+                .HasAnnotation("ProductVersion", "2.2.3-servicing-35854")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -58,7 +58,7 @@ namespace CS4540_A2.Migrations
                             Dept = "CS",
                             Description = "Software architectures, programming models, and programming environments pertinent to developing web applications.  Topics include client-server model, multi-tier software architecture, client-side scripting (JavaScript), server-side programming (Servlets and JavaServer Pages), component reuse (JavaBeans), database connectivity (JDBC), and web servers.",
                             Email = "professor_jim@cs.utah.edu",
-                            Name = "Web Dev",
+                            Name = "Web Development",
                             Number = 4540,
                             Semester = "FA",
                             Year = 2019
@@ -67,9 +67,9 @@ namespace CS4540_A2.Migrations
                         {
                             CId = 2,
                             Dept = "CS",
-                            Description = "Algo",
+                            Description = "This course provides an introduction to the problem of engineering computational efficiency into programs.Students will learn about classical algorithms(including sorting, searching, and graph traversal),data structures(including stacks, queues, linked lists, trees, hash tables, and graphs),and analysis of program space and time requirements.Students will complete extensive programming exercises that require the application of elementary techniques from software engineering.",
                             Email = "professor_jim@cs.utah.edu",
-                            Name = "This course provides an introduction to the problem of engineering computational efficiency into programs. Students will learn about classical algorithms (including sorting, searching, and graph traversal), data structures (including stacks, queues, linked lists, trees, hash tables, and graphs), and analysis of program space and time requirements. Students will complete extensive programming exercises that require the application of elementary techniques from software engineering.",
+                            Name = "Algorithms",
                             Number = 2420,
                             Semester = "FA",
                             Year = 2019

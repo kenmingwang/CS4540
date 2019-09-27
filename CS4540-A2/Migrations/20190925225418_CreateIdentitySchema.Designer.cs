@@ -7,10 +7,10 @@ using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
-namespace CS4540_A2.Migrations.UserRoleDB
+namespace CS4540A2.Migrations
 {
     [DbContext(typeof(UserRoleDBContext))]
-    [Migration("20190923205948_CreateIdentitySchema")]
+    [Migration("20190925225418_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

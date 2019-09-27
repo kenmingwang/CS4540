@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace CS4540_A2.Migrations
+namespace CS4540A2.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class initialcreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -53,8 +53,8 @@ namespace CS4540_A2.Migrations
                 columns: new[] { "CId", "Dept", "Description", "Email", "Name", "Number", "Semester", "Year" },
                 values: new object[,]
                 {
-                    { 1, "CS", "Software architectures, programming models, and programming environments pertinent to developing web applications.  Topics include client-server model, multi-tier software architecture, client-side scripting (JavaScript), server-side programming (Servlets and JavaServer Pages), component reuse (JavaBeans), database connectivity (JDBC), and web servers.", "professor_jim@cs.utah.edu", "Web Dev", 4540, "FA", 2019 },
-                    { 2, "CS", "Algo", "professor_jim@cs.utah.edu", "This course provides an introduction to the problem of engineering computational efficiency into programs. Students will learn about classical algorithms (including sorting, searching, and graph traversal), data structures (including stacks, queues, linked lists, trees, hash tables, and graphs), and analysis of program space and time requirements. Students will complete extensive programming exercises that require the application of elementary techniques from software engineering.", 2420, "FA", 2019 },
+                    { 1, "CS", "Software architectures, programming models, and programming environments pertinent to developing web applications.  Topics include client-server model, multi-tier software architecture, client-side scripting (JavaScript), server-side programming (Servlets and JavaServer Pages), component reuse (JavaBeans), database connectivity (JDBC), and web servers.", "professor_jim@cs.utah.edu", "Web Development", 4540, "FA", 2019 },
+                    { 2, "CS", "This course provides an introduction to the problem of engineering computational efficiency into programs.Students will learn about classical algorithms(including sorting, searching, and graph traversal),data structures(including stacks, queues, linked lists, trees, hash tables, and graphs),and analysis of program space and time requirements.Students will complete extensive programming exercises that require the application of elementary techniques from software engineering.", "professor_jim@cs.utah.edu", "Algorithms", 2420, "FA", 2019 },
                     { 3, "CS", "Practical exposure to the process of creating large software systems, including requirements specifications, design, implementation, testing, and maintenance. Emphasis on software process, software tools (debuggers, profilers, source code repositories, test harnesses), software engineering techniques (time management, code, and documentation standards, source code management, object-oriented analysis and design), and team development practice. Much of the work will be in groups and will involve modifying preexisting software systems.", "professor_jim@cs.utah.edu", "Software Practice I", 3500, "FA", 2019 },
                     { 4, "CS", "Introduction to propositional logic, predicate logic, formal logical arguments, finite sets, functions, relations, inductive proofs, recurrence relations, graphs, probability, and their applications to Computer Science.", "professor_mary@cs.utah.edu", "Discrete Structures", 2100, "FA", 2019 },
                     { 5, "CS", "Introduction to computer systems from a programmer's point of view.  Machine level representations of programs, optimizing program performance, memory hierarchy, linking, exceptional control flow, measuring program performance, virtual memory, concurrent programming with threads, network programming.", "professor_mary@cs.utah.edu", "Computer Systems", 4400, "FA", 2019 },

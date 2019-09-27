@@ -7,14 +7,18 @@
 </environment>
 
 @{ var x = User.IsInRole("Admin"); var Role_Message = ""; if (x) { Role_Message = " (Admin) "; }}
-@{ var y = User.IsInRole("DepartmentChair") ; if (y) { Role_Message = " (DepartmentChair) "; }}
+@{ var y = User.IsInRole("DepartmentChair"); if (y) { Role_Message = " (DepartmentChair) "; }}
 @{ var z = User.IsInRole("Instructor"); if (z) { Role_Message = " (Instructor) "; }}
 
 <ul class="navbar-nav">
     @if (SignInManager.IsSignedIn(User))
     {
+        var name = UserManager.GetUserName(User).Split("_");
+        var first = name[0].First().ToString().ToUpper() + String.Join("", name[0].Skip(1));
+        var last = name[1].First().ToString().ToUpper() + String.Join("", name[1].Skip(1));;
+        
         <li class="nav-item navbar-nav-login">
-            <a id="manage" class="nav-link text-white text-sm-right" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @Role_Message @UserManager.GetUserName(User)!</a>
+            <a id="manage" class="nav-link text-white text-sm-right" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @Role_Message @first @last!</a>
         </li>
         <li class="nav-item navbar-nav-login">
             <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">

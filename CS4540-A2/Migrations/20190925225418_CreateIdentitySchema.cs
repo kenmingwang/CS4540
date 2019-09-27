@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace CS4540_A2.Migrations.UserRoleDB
+namespace CS4540A2.Migrations
 {
     public partial class CreateIdentitySchema : Migration
     {

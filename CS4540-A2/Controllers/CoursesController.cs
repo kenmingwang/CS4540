@@ -27,11 +27,27 @@ namespace CS4540_A2.Controllers
             _context = context;
             _userManager = userManager;
         }
-
+        [Authorize(Roles = "Admin,DepartmentChair")]
         // GET: Courses
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Courses.ToListAsync());
+            var Courses = await _context.Courses.OrderBy(course => course.Number).ToListAsync();
+            
+            Dictionary<Course, string> map = new Dictionary<Course, string>();
+            foreach(Course c in Courses)
+            {
+                //Maybe not Every course has ONE professor?
+                var Professor = await _userManager.FindByEmailAsync(c.Email);
+                if(Professor == null)
+                {
+                    //Fake user
+                    Professor = new IdentityUser("Undetermined");
+                }
+                map.Add(c, Professor.UserName);   
+            }
+            ViewData["CoursesMap"] = map;
+            return View();
+           // return View(await _context.Courses.ToListAsync());
         }
 
         // GET: Courses/Details?cId=1
@@ -40,6 +56,8 @@ namespace CS4540_A2.Controllers
             var course = await _context.Courses
                 .FirstOrDefaultAsync(m =>
                m.CId == cId);
+
+            var LOS = await _context.LOS.Where(LO => LO.CourseCId == course.CId).ToListAsync();
 
             if (course == null)
             {
@@ -54,41 +72,68 @@ namespace CS4540_A2.Controllers
             }
             var userEmail = await _userManager.GetEmailAsync(user);
             var courseEmail = course.Email;
-
-            if(userEmail != courseEmail)
+            
+            // Instructor can't see the DCV page
+            if(userEmail != courseEmail && (User.IsInRole("Instructor")))
             {
                 Console.WriteLine(userEmail);
                 Console.WriteLine(courseEmail);
                 return View("../Shared/AccessDenied");
             }
-            var LOS = _context.LOS.Where(m => m.CourseCId == cId).ToList();
+
             course.LOS = LOS;
+            ViewData["Course"] = course;
 
             return View(course);
         }
-
-        // GET: Courses/Create
-        public IActionResult Create()
+        /* Assumes ProfessorUserName is passed in as danny_kopta */
+        public async Task<IActionResult> DetailsProfessor(string ProfessorUserName)
         {
-            return View();
-        }
-
-        // POST: Courses/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CId,Name,Description,Dept,Number,Semester,Year")] Course course)
-        {
-            if (ModelState.IsValid)
+            /* Check User acceess */
+            var Professor = await _userManager.FindByIdAsync(ProfessorUserName);
+            // Checks bad parameter
+            if(Professor == null)
             {
-                _context.Add(course);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            return View(course);
+
+            // Email in this course matches the current login's email 
+            var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User));
+
+            // Instructor who is not the provided ProfessorUserName can't access
+            // But admin and chair can see
+            if(user.UserName == ProfessorUserName && User.IsInRole("Instructor"))
+            {
+                return View("../Shared/AccessDenied");
+            }
+
+            // At this point user is for sure to be the professor
+            // Unless there's duplicate names
+            // Will consider so later
+            var professorEmail = await _userManager.GetEmailAsync(user);
+
+            // Get courses links to the email
+            var courses = await _context.Courses
+                .Where(m =>
+               m.Email == professorEmail).ToListAsync();
+
+            if (courses == null)
+            {
+                return NotFound();
+            }
+
+            foreach(Course c in courses)
+            {
+                var LOS = await _context.LOS.Where(LO => LO.CourseCId == c.CId).ToListAsync();
+                c.LOS = LOS;
+            }
+             
+            ViewData["Courses"] = courses;
+
+            return View(courses);
         }
 
+        [Authorize(Roles ="Admin")]
         // GET: Courses/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {

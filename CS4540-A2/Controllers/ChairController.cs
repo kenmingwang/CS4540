@@ -23,7 +23,8 @@ namespace CS4540_A2.Controllers
         {
             var Courses = await _context.Courses.ToListAsync();
             ViewData["Courses"] = Courses;
-            return View("DCV");
+            return View();
         }
+
     }
 }

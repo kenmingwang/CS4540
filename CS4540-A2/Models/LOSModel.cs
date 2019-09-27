@@ -29,7 +29,7 @@ namespace CS4540_A2.Models
                 new Course
                 {
                     CId = 1,
-                    Name = "Web Dev",
+                    Name = "Web Development",
                     Description = "Software architectures, programming models, and programming environments pertinent to developing web applications.  Topics include client-server model, multi-tier software architecture, client-side scripting (JavaScript), server-side programming (Servlets and JavaServer Pages), component reuse (JavaBeans), database connectivity (JDBC), and web servers.",
                     Dept = "CS",
                     Number = 4540,
@@ -40,8 +40,8 @@ namespace CS4540_A2.Models
                 new Course
                 {
                     CId = 2,
-                    Name = "This course provides an introduction to the problem of engineering computational efficiency into programs. Students will learn about classical algorithms (including sorting, searching, and graph traversal), data structures (including stacks, queues, linked lists, trees, hash tables, and graphs), and analysis of program space and time requirements. Students will complete extensive programming exercises that require the application of elementary techniques from software engineering.",
-                    Description = "Algo",
+                    Name = "Algorithms",
+                    Description = "This course provides an introduction to the problem of engineering computational efficiency into programs.Students will learn about classical algorithms(including sorting, searching, and graph traversal),data structures(including stacks, queues, linked lists, trees, hash tables, and graphs),and analysis of program space and time requirements.Students will complete extensive programming exercises that require the application of elementary techniques from software engineering.",
                     Dept = "CS",
                     Number = 2420,
                     Semester = "FA",

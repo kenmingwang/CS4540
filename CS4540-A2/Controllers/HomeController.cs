@@ -47,11 +47,6 @@ namespace CS4540_A2.Controllers
             return View("DCV");
         }
 
-        [Route("Admin")]
-        public IActionResult Admin()
-        {
-            return View("Admin");
-        }
 
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

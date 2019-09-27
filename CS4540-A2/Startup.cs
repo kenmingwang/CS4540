@@ -75,7 +75,7 @@ namespace CS4540_A2
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=LOSdb;Trusted_Connection=True;ConnectRetryCount=0";
+            var connection = @"Server=(localdb)\mssqllocaldb;Database=LOS;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<LOSContext>
                 (options => options.UseSqlServer(connection));
         }
