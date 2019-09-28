@@ -17,6 +17,7 @@ using Microsoft.Extensions.DependencyInjection;
 using CS4540_A2.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI;
+using CS4540_A2.Data;
 
 namespace CS4540_A2
 {
@@ -75,9 +76,8 @@ namespace CS4540_A2
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 
-            var connection = @"Server=(localdb)\mssqllocaldb;Database=LOS;Trusted_Connection=True;ConnectRetryCount=0";
             services.AddDbContext<LOSContext>
-                (options => options.UseSqlServer(connection));
+                (options => options.UseSqlServer(Configuration.GetConnectionString("LOSDBContextConnection")));
         }
         
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

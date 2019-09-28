@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CS4540_A2.Models;
+using CS4540_A2.Data;
 
 namespace CS4540_A2.Controllers
 {

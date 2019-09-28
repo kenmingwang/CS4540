@@ -1,5 +1,6 @@
 ﻿<!-- Name: Ken Wang
      UID: u1193853 -->
+@using CS4540_A2.Util
 
 @{ ViewData["Title"] = "Deparment Chair"; }
 
@@ -39,9 +40,7 @@
                 <tbody>
                     @foreach (KeyValuePair<Course,string> courseMap in @ViewData["CoursesMap"] as IEnumerable<KeyValuePair<Course,string>>)
                     {
-                         var name = courseMap.Value.Split("_");
-                         var first = name[0].First().ToString().ToUpper() + String.Join("", name[0].Skip(1));
-                         var last = name[1].First().ToString().ToUpper() + String.Join("", name[1].Skip(1));;
+                         var name = UserNameAndRolesUtil.UserNameToActualName(courseMap.Value);
                         <tr>
                             <td>
                                 <a asp-action="Details" asp-route-cId="@courseMap.Key.CId">
@@ -50,7 +49,7 @@
                                     @Html.DisplayFor(modelItem => courseMap.Key.Name)
                                 </a>
                             </td>
-                            <td><a href="~/files/DummyProfessor.html" target="_blank">@first @last</a></td>
+                            <td><a asp-action="DetailsProfessor" asp-route-ProfessorUserName="@courseMap.Value">@name[0] @name[1]</a></td>
                             <td>
                                 <div class="progress">
                                     <div id="progress-bar" class="progress-bar progress-bar-striped" role="progressbar" style="width: 10%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100">

@@ -8,8 +8,12 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using CS4540_A2.Areas.Identity.Data;
+using CS4540_A2.Data;
+using CS4540_A2.Models;
+using CS4540A2.Migrations;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
@@ -29,8 +33,18 @@ namespace CS4540_A2
                 var services = scope.ServiceProvider;
                 try
                 {
+                    // Migrate and seed Courses and LOS
+                    var LOSContext = services.GetRequiredService<LOSContext>();
+                    LOSContext.Database.Migrate();
+
+                    LOSDbInitializer.Initialize(LOSContext);
+
+                    // Migrate and seed User and Roles
+                    var UserContext = services.GetRequiredService<UserRoleDBContext>();
+                    UserContext.Database.Migrate();
+
                     var serviceProvider = services.GetRequiredService<IServiceProvider>();
-                    Seed.CreateUserRoles(serviceProvider).Wait();
+                    Seed.CreateUserRoles(serviceProvider).Wait();                  
 
                 }
                 catch (Exception exception)

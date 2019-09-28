@@ -13,6 +13,7 @@ using CS4540_A2.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using CS4540_A2.Data;
 
 namespace CS4540_A2.Controllers
 {
@@ -86,11 +87,14 @@ namespace CS4540_A2.Controllers
 
             return View(course);
         }
-        /* Assumes ProfessorUserName is passed in as danny_kopta */
+        /* 
+         *  Gets All the courses that belongs to such professor 
+            Assumes ProfessorUserName is passed in as danny_kopta, which is the username.        
+         */
         public async Task<IActionResult> DetailsProfessor(string ProfessorUserName)
         {
             /* Check User acceess */
-            var Professor = await _userManager.FindByIdAsync(ProfessorUserName);
+            var Professor = await _userManager.FindByNameAsync(ProfessorUserName);
             // Checks bad parameter
             if(Professor == null)
             {
@@ -102,20 +106,20 @@ namespace CS4540_A2.Controllers
 
             // Instructor who is not the provided ProfessorUserName can't access
             // But admin and chair can see
-            if(user.UserName == ProfessorUserName && User.IsInRole("Instructor"))
+            if(user.UserName != ProfessorUserName && User.IsInRole("Instructor"))
             {
                 return View("../Shared/AccessDenied");
             }
 
-            // At this point user is for sure to be the professor
+            // At this point user is for sure to be the right professor or chair or admin
             // Unless there's duplicate names
             // Will consider so later
-            var professorEmail = await _userManager.GetEmailAsync(user);
+            var professorEmail = await _userManager.GetEmailAsync(Professor);
 
             // Get courses links to the email
             var courses = await _context.Courses
                 .Where(m =>
-               m.Email == professorEmail).ToListAsync();
+               m.Email == professorEmail).OrderBy(course => course.Number).ToListAsync();
 
             if (courses == null)
             {
@@ -129,94 +133,10 @@ namespace CS4540_A2.Controllers
             }
              
             ViewData["Courses"] = courses;
+            ViewData["Name"] = ProfessorUserName;
 
             return View(courses);
         }
 
-        [Authorize(Roles ="Admin")]
-        // GET: Courses/Edit/5
-        public async Task<IActionResult> Edit(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var course = await _context.Courses.FindAsync(id);
-            if (course == null)
-            {
-                return NotFound();
-            }
-            return View(course);
-        }
-
-        // POST: Courses/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CId,Name,Description,Dept,Number,Semester,Year")] Course course)
-        {
-            if (id != course.CId)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(course);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CourseExists(course.CId))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(course);
-        }
-
-        // GET: Courses/Delete/5
-        public async Task<IActionResult> Delete(int? id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var course = await _context.Courses
-                .FirstOrDefaultAsync(m => m.CId == id);
-            if (course == null)
-            {
-                return NotFound();
-            }
-
-            return View(course);
-        }
-
-        // POST: Courses/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var course = await _context.Courses.FindAsync(id);
-            _context.Courses.Remove(course);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-        }
-
-        private bool CourseExists(int id)
-        {
-            return _context.Courses.Any(e => e.CId == id);
-        }
     }
 }

@@ -13,9 +13,10 @@ main {
 
 
 .container {
-    display: flex;
+    display: block;
     flex-direction: column;
-    height: 90vh;
+    min-height: 80vh;
+    position: relative;
 }
 
 /* Header style */
@@ -184,15 +185,20 @@ main {
     width: 0%;
 }
 
-footer {
+/*footer {
     height: 75px;
     flex-shrink: 0;
     background-color: #134c7d;
 }
+    */
 
 
 .p {
     font-family: Arial;
     font-size: 15px;
+}
+
+.logout-p{
+    margin-top:-1px;
 }
 

@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using CS4540_A2.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Authorization;
+using CS4540_A2.Data;
 
 namespace CS4540_A2.Controllers
 {
