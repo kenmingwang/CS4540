@@ -19,8 +19,6 @@ namespace CS4540_A2.Services
             {
                 SmtpClient smtpClient = new SmtpClient("smtp.utah.edu", 25);
                 MailMessage mail = new MailMessage();
-                smtpClient.EnableSsl = true;
-                smtpClient.Credentials = new NetworkCredential("u1193853", "");
                 mail.From = new MailAddress("u1193853@utah.edu", "LOT");
                 mail.To.Add(new MailAddress(email));
                 mail.Subject = subject;

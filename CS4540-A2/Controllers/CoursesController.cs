@@ -17,7 +17,7 @@ using CS4540_A2.Data;
 
 namespace CS4540_A2.Controllers
 {
-    [Authorize(Roles = "Admin,Instructor,DepartmentChair")]
+    [Authorize(Roles = "Instructor,DepartmentChair")]
     public class CoursesController : Controller
     {
         private readonly LOSContext _context;

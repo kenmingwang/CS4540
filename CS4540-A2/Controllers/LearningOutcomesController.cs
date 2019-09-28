@@ -11,9 +11,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using CS4540_A2.Models;
 using CS4540_A2.Data;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CS4540_A2.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class LearningOutcomesController : Controller
     {
         private readonly LOSContext _context;

@@ -15,7 +15,6 @@ using CS4540_A2.Data;
 
 namespace CS4540_A2.Controllers
 {
-    [Authorize]
     public class HomeController : Controller
     {
         private readonly LOSContext _context;
@@ -25,7 +24,6 @@ namespace CS4540_A2.Controllers
             _context = context;
         }
 
-        [Authorize]
         public IActionResult Index()
         {
             return View();
@@ -35,20 +33,6 @@ namespace CS4540_A2.Controllers
         {
             return View();
         }
-
-        [Route("Course")]
-        public IActionResult Course()
-        {
-            return View("Course");
-        }
-
-        [Route("DCV")]
-        public IActionResult DCV()
-        {
-            return View("DCV");
-        }
-
-
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
