@@ -95,7 +95,7 @@ namespace CS4540_A2.Controllers
             {
                 return NotFound();
             }
-            ViewData["CourseCId"] = new SelectList(_context.Courses, "CId", "Dept", learningOutcome.CourseCId);
+            ViewData["CourseCId"] = new SelectList(_context.Courses, "CId", "Name", learningOutcome.CourseCId);
             return View(learningOutcome);
         }
 

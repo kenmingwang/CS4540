@@ -25,8 +25,8 @@
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="CourseCId" class="control-label"></label>
-                <select asp-for="CourseCId" class="form-control" asp-items="ViewBag.CourseCId"></select>
+                <label class="control-label">Course</label>
+                <select type="text" name="linkCourse" class="form-control" asp-items="ViewBag.CourseCId"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />

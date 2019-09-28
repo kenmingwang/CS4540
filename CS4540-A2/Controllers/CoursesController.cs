@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using CS4540_A2.Data;
+using CS4540_A2.Util;
 
 namespace CS4540_A2.Controllers
 {
@@ -74,16 +75,15 @@ namespace CS4540_A2.Controllers
             var userEmail = await _userManager.GetEmailAsync(user);
             var courseEmail = course.Email;
             
-            // Instructor can't see the DCV page
+            // Instructor can't see other Courses that does not belong to him/her
             if(userEmail != courseEmail && (User.IsInRole("Instructor")))
             {
-                Console.WriteLine(userEmail);
-                Console.WriteLine(courseEmail);
                 return View("../Shared/AccessDenied");
             }
 
             course.LOS = LOS;
             ViewData["Course"] = course;
+            ViewData["Professor"] = UserNameAndRolesUtil.UserNameToActualName(user.UserName);
 
             return View(course);
         }

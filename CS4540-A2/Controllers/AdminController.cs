@@ -8,6 +8,7 @@ using CS4540_A2.Util;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace CS4540_A2.Controllers
@@ -26,30 +27,71 @@ namespace CS4540_A2.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> CourseIndex()
         {
-            return View();
+            return View(await _context.Courses.ToListAsync());
+        }
+
+        public async Task<IActionResult> LOSIndex()
+        {
+            return View("../LearningOutcomes/Index",await _context.LOS.ToListAsync());
         }
         // GET: Courses/Create
-        public IActionResult Create()
+        public IActionResult CreateCourse()
         {
             return View();
         }
+
+        // GET: Courses/Create
+        public IActionResult CreateLOS()
+        {
+            ViewData["CourseCId"] = new SelectList(_context.Courses, "Name", "Name");
+            return View("../LearningOutcomes/Create");
+        }
+
+
 
         // POST: Courses/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CId,Name,Description,Dept,Number,Semester,Year,Email")] Course course)
+        public async Task<IActionResult> CreateCourse([Bind("CId,Name,Description,Dept,Number,Semester,Year,Email")] Course course)
         {
             if (ModelState.IsValid)
             {
                 _context.Add(course);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(CourseIndex));
             }
             return View(course);
+        }
+
+        // POST: LearningOutcomes/Create
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateLOS([Bind("LId,Name,Description")] LearningOutcome learningOutcome, string linkCourse)
+        {
+            
+
+            if (ModelState.IsValid)
+            {
+                var course = await _context.Courses
+                    .FirstOrDefaultAsync(m =>
+                    m.Name == linkCourse);
+                learningOutcome.CourseCId = course.CId;
+                _context.Add(learningOutcome);
+                
+                course.LOS.Add(learningOutcome);
+
+
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(LOSIndex));
+            }
+            ViewData["CourseCId"] = new SelectList(_context.Courses, "Name", "Name");
+            return View("../LearningOutcomes/Create");
         }
 
         // GET: Courses/Edit/5
@@ -98,7 +140,7 @@ namespace CS4540_A2.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(CourseIndex));
             }
             return View(course);
         }
@@ -129,7 +171,7 @@ namespace CS4540_A2.Controllers
             var course = await _context.Courses.FindAsync(id);
             _context.Courses.Remove(course);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(CourseIndex));
         }
 
         private bool CourseExists(int id)
