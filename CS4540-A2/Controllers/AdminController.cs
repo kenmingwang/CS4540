@@ -34,7 +34,7 @@ namespace CS4540_A2.Controllers
 
         public async Task<IActionResult> LOSIndex()
         {
-            return View("../LearningOutcomes/Index",await _context.LOS.ToListAsync());
+            return View("../LearningOutcomes/Index", await _context.LOS.ToListAsync());
         }
         // GET: Courses/Create
         public IActionResult CreateCourse()
@@ -74,7 +74,7 @@ namespace CS4540_A2.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateLOS([Bind("LId,Name,Description")] LearningOutcome learningOutcome, string linkCourse)
         {
-            
+
 
             if (ModelState.IsValid)
             {
@@ -83,7 +83,7 @@ namespace CS4540_A2.Controllers
                     m.Name == linkCourse);
                 learningOutcome.CourseCId = course.CId;
                 _context.Add(learningOutcome);
-                
+
                 course.LOS.Add(learningOutcome);
 
 
@@ -186,7 +186,7 @@ namespace CS4540_A2.Controllers
             var role = _roleManager.Roles.OrderBy(r => r.Name).ToList();
 
             Dictionary<string[], bool[]> UserRoleMap = new Dictionary<string[], bool[]>();
-           
+
             foreach (IdentityUser user in users)
             {
                 var name = UserNameAndRolesUtil.UserNameToActualName(user.UserName);
@@ -205,12 +205,48 @@ namespace CS4540_A2.Controllers
         {
             bool[] rtr = new bool[roles.Count];
 
-            for(int i = 0; i< roles.Count; i++)
+            for (int i = 0; i < roles.Count; i++)
             {
                 if (await _userManager.IsInRoleAsync(user, roles[i].Name))
                     rtr[i] = true;
-            }   
+            }
             return rtr;
         }
+
+        public async Task<IActionResult> onPostRoleChangeAsync([FromBody] UserActionRequest request)
+        {
+            string[] nameArr = { request.First, request.Last };
+            var userName = UserNameAndRolesUtil.ActualNameToUserName(nameArr);
+            var user = await _userManager.FindByNameAsync(userName);
+
+            if (request.Action == "authorize")
+            {
+                await _userManager.AddToRoleAsync(user, request.Role);
+            }
+            else if (request.Action == "revoke")
+            {
+                if (request.Role == "Admin")
+                {
+                    var admins = await _userManager.GetUsersInRoleAsync("Admin");
+                    // Corner Case where can't remove admin when the user is the last admin
+                    if (admins.Count == 1)
+                    {
+                        return StatusCode(405);
+                    }
+                }
+                await _userManager.RemoveFromRoleAsync(user, request.Role);
+            }
+            var list = await _userManager.GetRolesAsync(user);
+
+            return new JsonResult(list);
+        }
+    }
+    public class UserActionRequest
+    {
+        public string First { get; set; }
+        public string Last { get; set; }
+        public string Action { get; set; }
+        public string Role { get; set; }
+
     }
 }

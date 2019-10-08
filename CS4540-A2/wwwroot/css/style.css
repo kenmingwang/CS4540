@@ -202,3 +202,7 @@ main {
     margin-top:-1px;
 }
 
+label {
+    cursor: pointer;
+}
+
