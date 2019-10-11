@@ -1,31 +1,167 @@
 ﻿<!-- Name: Ken Wang
      UID: u1193853 -->
 @model CS4540_A2.Models.Course
-
 @{
     ViewData["Title"] = "Details";
     Course course = ViewData["Course"] as Course;
     var name = ViewData["Professor"] as string[];
+    var fullname = name[0] + ' ' + name[1];
     var count = 0;
+    var isNull = @ViewData["Note"] == null;
+    var text = @ViewData["Note"];
 }
 
-<div>
-    <h1 class="display-4">
-        @Html.DisplayFor(model => model.Dept) -
-        @Html.DisplayFor(model => model.Number) -
-        @Html.DisplayFor(model => model.Semester) -
-        @Html.DisplayFor(model => model.Year)
-    </h1>
-    <h1 class="display-4">
-        @Html.DisplayFor(model => model.Name) -
-        @name[0] @name[1]
-    </h1>
+<script>
 
-    <h3 class="mt-3 mb-2 p text-justify text-center">
-        @Html.DisplayFor(model => model.Description)
-    </h3>
 
-</div>
+    function ChangeBG() {
+        if ('@ViewData["Role"]' == 'Instructor') {
+            $('#editor1').addClass('bg-white');
+
+            if ('@isNull' === 'True') {
+                CKEDITOR.instances.editor1.setData('');
+            }
+        }
+        else {
+
+        }
+    }
+
+    function AddNote() {
+        @{ var time = DateTime.Now;}
+        var time = '@time';
+        Swal.fire({
+            text: 'Are you sure to UPDATE this note? ',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+                var text = CKEDITOR.instances.editor1.getData();
+                var note = JSON.stringify({
+                    'Text': text,
+                    'PostDate': time,
+                    'ProfessorFullName': '@fullname',
+                    'CourseCId': '@course.CId'
+                });
+                console.log(note);
+                // Actual post to controller
+                $.ajax({
+                    url: '/Courses/onPostSubmitNoteAsync',
+                    data: note,
+                    contentType: 'application/json',
+                    type: 'POST',
+                    success: function (data) {
+                        Swal.fire(
+                            'Success!',
+                            'Your changes has been saved.',
+                            'success'
+                        );
+                        $('#Approval').removeClass();
+                        $('#Approval').addClass('badge badge-info d-inline');
+                        $('#Approval').html('Pending Approval');
+                        console.log(data);
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire(
+                            'Failed!',
+                            'Somthing went wrong, please try again with less words!',
+                            'error'
+                        );
+                    }
+                })
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then(function (success) {
+            if (success.value) {
+                $('#LastUpdateTime').html('&nbsp;' + 'on ' + time);
+                $('#LastUpdateName').text('Last updated by : @fullname');
+                $('#editor1').removeClass('bg-white');
+            }
+        });
+    }
+
+    function ApproveNote() {
+        Swal.fire({
+            text: 'Are you sure to APPROVE this note? ',
+            showCancelButton: true,
+            confirmButtonText: 'Yes',
+            showLoaderOnConfirm: true,
+            preConfirm: () => {
+                // Actual post to controller
+                $.ajax({
+                    url: '/Courses/onPostApproveNoteAsync?CNId=' + @ViewData["NoteId"],
+                    contentType: 'application/json',
+                    type: 'POST',
+                    success: function (data) {
+                        Swal.fire(
+                            'Success!',
+                            'Your changes has been saved.',
+                            'success'
+                        );
+                             $('#Approval').removeClass();
+                             $('#Approval').addClass('badge badge-success d-inline');
+                             $('#Approval').html('Approved');
+                             $('#ApproveNoteBtn').attr('disabled',true);  
+                    },
+                    error: function (xhr, status, error) {
+                        Swal.fire(
+                            'Failed!',
+                            'Somthing went wrong, please try again with less words!',
+                            'error'
+                        );
+                    }
+                })
+            },
+            allowOutsideClick: () => !Swal.isLoading()
+        }).then(function (success) {
+            if (success.value) {                
+            }
+        });
+    }
+
+    $(function () {
+        // Check if there's note
+        if ('@isNull' === 'False') {
+            $('#LastUpdateTime').html('&nbsp;' + 'on  @ViewData["NoteTime"]');
+            $('#LastUpdateName').text('Last updated by : @ViewData["ProfessorFullName"]');
+        }
+        else {
+            if ('@ViewData["Role"]' == 'Chair') {
+                $('#Approval').addClass('badge-info')
+                $('#Approval').addClass('mt-6')
+                $('#Approval').html('Nothing to approve');
+                $('#ApproveNoteBtn').attr('disabled', true);
+             }
+        }
+
+        if ('@ViewData["Approval"]' === 'False') {
+
+            $('#Approval').addClass('badge-info')
+            $('#Approval').html('Pending Approval');
+        }
+        else {
+            if ('@isNull' === 'False') {
+                $('#ApproveNoteBtn').addClass('disabled');
+                $('#Approval').addClass('badge badge-success')
+                $('#ApproveNoteBtn').attr('disabled',true);
+                $('#Approval').html('Approved');
+            }
+        }
+
+        // Check the role of the current user
+        if ('@ViewData["Role"]' == 'Instructor') {
+
+            $('#SaveNoteBtn').removeClass('d-none');
+        }
+        else {
+
+
+            $('#ApproveNoteBtn').removeClass('d-none');
+            $('#editor1').attr('contenteditable',false);
+        }
+    });
+</script>
+
 
 <div id="accordion">
     <div class="card">
@@ -37,7 +173,46 @@
                 @Html.DisplayFor(model => model.Year)
             </span> <span class="badge badge-pill badge-warning">Incomplete</span>
         </button>
+        <div class="mb-1 card">
+            <div class="card-body">
+                <h3 class="card-title text-center">
+                    @Html.DisplayFor(model => model.Name)
 
+                </h3>
+                <h5 class="card-title text-center">
+                    Professor: @name[0] @name[1]
+                </h5>
+                <p class="card-text">
+
+                    @Html.DisplayFor(model => model.Description)
+                </p>
+
+            </div>
+            <div class="card-footer">
+                <h4 class="card-title d-inline">Professor Note:</h4>
+                <span id="Approval" class="badge d-inline"></span>
+                <div id="editor1" class="border rounded p-2 mt-2" contenteditable="true" onclick="ChangeBG()">
+                    @if (ViewData["Note"] != null)
+                    {
+                        @Html.Raw(text.ToString().Substring(0, text.ToString().Length - 1))
+                    }
+                    else
+                    {
+                        <p class="text-muted"><i>The note for this class is currently empty, click to edit and edit note...</i></p>
+                    }
+                </div>
+                <button id="SaveNoteBtn" class="btn  mt-2 btn-primary d-none" onclick="AddNote()">Save</button>
+                <button id="ApproveNoteBtn" class="btn  mt-2 btn-primary d-none" onclick="ApproveNote()">Approve</button>
+
+                <p id="LastUpdateTime" class="d-inline float-right mt-4 text-muted">
+                </p>
+                <p id="LastUpdateName" class="d-inline float-right mt-4 text-muted">
+                </p>
+
+            </div>
+
+        </div>
+        <hr>
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
             <table class="table table-hover table-striped">
                 <thead>

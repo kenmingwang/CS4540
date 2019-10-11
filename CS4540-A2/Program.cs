@@ -44,7 +44,11 @@ namespace CS4540_A2
                     UserContext.Database.Migrate();
 
                     var serviceProvider = services.GetRequiredService<IServiceProvider>();
-                    Seed.CreateUserRoles(serviceProvider).Wait();                  
+                    Seed.CreateUserRoles(serviceProvider).Wait();     
+                    
+                    // Migrate Course and LOS notes
+                    var NotesContext = services.GetRequiredService<CourseNoteContext>();
+                    NotesContext.Database.Migrate();
 
                 }
                 catch (Exception exception)

@@ -14,6 +14,17 @@
     <None Remove="Views\Chair\**" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Compile Remove="Migrations\20190927181953_LOSSchema.cs" />
+    <Compile Remove="Migrations\20190927181953_LOSSchema.Designer.cs" />
+    <Compile Remove="Migrations\20191010232632_CourseNote.cs" />
+    <Compile Remove="Migrations\20191010232632_CourseNote.Designer.cs" />
+    <Compile Remove="Migrations\20191010233115_LOSContextMigration.cs" />
+    <Compile Remove="Migrations\20191010233115_LOSContextMigration.Designer.cs" />
+    <Compile Remove="Migrations\20191010234140_LOSContextMigration.cs" />
+    <Compile Remove="Migrations\20191010234140_LOSContextMigration.Designer.cs" />
+  </ItemGroup>
+
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.App" />

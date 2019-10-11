@@ -42,10 +42,10 @@
                     {
                          var name = UserNameAndRolesUtil.UserNameToActualName(courseMap.Value);
                         <tr>
-                            <td>
+                            <td class="td-width">
                                 <a asp-action="Details" asp-route-cId="@courseMap.Key.CId">
-                                    @Html.DisplayFor(modelItem => courseMap.Key.Dept)-
-                                    @Html.DisplayFor(modelItem => courseMap.Key.Number)-
+                                    @Html.DisplayFor(modelItem => courseMap.Key.Dept) -
+                                    @Html.DisplayFor(modelItem => courseMap.Key.Number) -
                                     @Html.DisplayFor(modelItem => courseMap.Key.Name)
                                 </a>
                             </td>

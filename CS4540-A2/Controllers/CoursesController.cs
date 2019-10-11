@@ -34,22 +34,22 @@ namespace CS4540_A2.Controllers
         public async Task<IActionResult> Index()
         {
             var Courses = await _context.Courses.OrderBy(course => course.Number).ToListAsync();
-            
+
             Dictionary<Course, string> map = new Dictionary<Course, string>();
-            foreach(Course c in Courses)
+            foreach (Course c in Courses)
             {
                 //Maybe not Every course has ONE professor?
                 var Professor = await _userManager.FindByEmailAsync(c.Email);
-                if(Professor == null)
+                if (Professor == null)
                 {
                     //Fake user
                     Professor = new IdentityUser("Undetermined");
                 }
-                map.Add(c, Professor.UserName);   
+                map.Add(c, Professor.UserName);
             }
             ViewData["CoursesMap"] = map;
             return View();
-           // return View(await _context.Courses.ToListAsync());
+            // return View(await _context.Courses.ToListAsync());
         }
 
         // GET: Courses/Details?cId=1
@@ -59,31 +59,55 @@ namespace CS4540_A2.Controllers
                 .FirstOrDefaultAsync(m =>
                m.CId == cId);
 
-            var LOS = await _context.LOS.Where(LO => LO.CourseCId == course.CId).ToListAsync();
-
             if (course == null)
             {
                 return NotFound();
             }
 
+            var LOS = await _context.LOS.Where(LO => LO.CourseCId == course.CId).ToListAsync();
+
+            var courseNote = await _context.CourseNotes.Where(c => c.CourseCId == course.CId).
+                OrderByDescending(n => n.PostDate).ToListAsync();
+
+
+            if (courseNote.Count != 0)
+            {
+                var note = courseNote.ElementAt(0);
+                ViewData["Note"] = note.Text;
+                ViewData["NoteTime"] = note.PostDate;
+                ViewData["ProfessorFullName"] = note.ProfessorFullName;
+                ViewData["Approval"] = note.IsApproved;
+                ViewData["NoteId"] = note.CNId;
+            }
+
             // Email in this course matches the current login's email 
             var user = await _userManager.FindByIdAsync(_userManager.GetUserId(User));
-            if(user == null)
+            if (user == null)
             {
                 return NotFound();
             }
             var userEmail = await _userManager.GetEmailAsync(user);
             var courseEmail = course.Email;
-            
+            var professor = await _userManager.FindByEmailAsync(courseEmail);
+
             // Instructor can't see other Courses that does not belong to him/her
-            if(userEmail != courseEmail && (User.IsInRole("Instructor")))
+            if (userEmail != courseEmail && (User.IsInRole("Instructor")))
             {
                 return View("../Shared/AccessDenied");
             }
 
             course.LOS = LOS;
             ViewData["Course"] = course;
-            ViewData["Professor"] = UserNameAndRolesUtil.UserNameToActualName(user.UserName);
+            ViewData["Professor"] = UserNameAndRolesUtil.UserNameToActualName(professor.UserName);
+            if (User.IsInRole("DepartmentChair"))
+            {
+                ViewData["Role"] = "Chair";
+            }
+            // Can't be admin, it's prohitbited
+            else
+            {
+                ViewData["Role"] = "Instructor";
+            }
 
             return View(course);
         }
@@ -96,7 +120,7 @@ namespace CS4540_A2.Controllers
             /* Check User acceess */
             var Professor = await _userManager.FindByNameAsync(ProfessorUserName);
             // Checks bad parameter
-            if(Professor == null)
+            if (Professor == null)
             {
                 return NotFound();
             }
@@ -106,7 +130,7 @@ namespace CS4540_A2.Controllers
 
             // Instructor who is not the provided ProfessorUserName can't access
             // But admin and chair can see
-            if(user.UserName != ProfessorUserName && User.IsInRole("Instructor"))
+            if (user.UserName != ProfessorUserName && User.IsInRole("Instructor"))
             {
                 return View("../Shared/AccessDenied");
             }
@@ -126,17 +150,76 @@ namespace CS4540_A2.Controllers
                 return NotFound();
             }
 
-            foreach(Course c in courses)
+            foreach (Course c in courses)
             {
                 var LOS = await _context.LOS.Where(LO => LO.CourseCId == c.CId).ToListAsync();
                 c.LOS = LOS;
             }
-             
+
             ViewData["Courses"] = courses;
             ViewData["Name"] = ProfessorUserName;
 
             return View(courses);
         }
+        public async Task<IActionResult> onPostSubmitNoteAsync([FromBody] CourseNoteData request)
+        {
+            var course = _context.Courses.Where(c => c.CId == request.CourseCId).FirstOrDefault();
+            if (course == null)
+            {
+                return null;
+            }
+            CourseNote note = new CourseNote()
+            {
+                Text = request.Text,
+                PostDate = request.PostDate,
+                ProfessorFullName = request.ProfessorFullName,
+                CourseCId = course.CId,
+            };
 
+
+            try
+            {
+                _context.CourseNotes.Add(note);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToString(), "An error occurred while creating roles");
+                return StatusCode(405);
+            }
+            return StatusCode(200);
+        }
+
+        public async Task<IActionResult> onPostApproveNoteAsync(int CNId)
+        {
+            var note = _context.CourseNotes.Where(c => c.CNId == CNId).FirstOrDefault();
+            note.IsApproved = true;
+
+            try
+            {
+                _context.CourseNotes.Update(note);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToString(), "An error occurred while creating roles");
+                return StatusCode(405);
+            }
+            return StatusCode(200);
+        }
+
+
+    }
+    public class CourseNoteData
+    {
+        public string Text { get; set; }
+        public DateTime PostDate { get; set; }
+        public string ProfessorFullName { get; set; }
+        public int CourseCId { get; set; }
+    }
+
+    public class ApporvalData
+    {
+        public int id { get; set; }
     }
 }
