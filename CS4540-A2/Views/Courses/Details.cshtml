@@ -146,7 +146,7 @@
             }
         });
     }
-    function AddComment(editor, LId) {
+    function AddComment(editor,commentTime, LId) {
         Swal.fire({
             text: 'Are you sure to UPDATE this note? ',
             showCancelButton: true,
@@ -154,11 +154,12 @@
             showLoaderOnConfirm: true,
             preConfirm: () => {
                 console.log(editor);
+                var date = getDate();
                 var isProfessor = '@User.IsInRole("Instructor")';
                 var text = CKEDITOR.instances[editor].getData();
                 var note = JSON.stringify({
                     'Text': text,
-                    'PostDate': getDate(),
+                    'PostDate': date,
                     'ProfessorFullName': '@fullname',
                     'FId': LId
                 });
@@ -182,6 +183,7 @@
                         else {
                             $('#' + editor).removeClass('text-red');
                         }
+                        $('#' + commentTime).text('Last edit: '+ date);
                     },
                     error: function (xhr, status, error) {
                         Swal.fire(
@@ -294,8 +296,8 @@
         <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordion">
             <table class="table table-hover table-striped">
                 <colgroup>
-                    <col span="1" style="width: 20%;">
-                    <col span="1" style="width: 60%;">
+                    <col span="1" style="width: 30%;">
+                    <col span="1" style="width: 50%;">
                     <col span="1" style="width: 20%;">
                 </colgroup>
 
@@ -341,8 +343,10 @@
                         </tr>
                         <tr>
                             <td name="comment" colspan="1" class="d-none ">
-                                <p class="mt-2 ml-4 mb-0">LOS Comments:</p>
-                                <button id="SaveNoteBtn" class="btn btn-sm btn-primary save-btn ml-4" onclick="AddComment('editor@(count+2)', '@LOS.LId')">Save</button>
+                                <p class="d-inline mt-2 ml-4 mb-0">LOS Comment: </p>
+
+                                <button id="SaveNoteBtn" class="btn btn-sm btn-primary save-btn ml-1 d-inline" onclick="AddComment('editor@(count+2)','lastEditComment@(count+2)', '@LOS.LId')">Save</button>
+                                <p id="lastEditComment@(count+2)" class="mt-2 ml-4 mb-0">Last edit: @map[LOS.LId].PostDate</p>
                             </td>
                             <td name="comment" colspan="2" class="d-none">
                                 <div class="accordian-body collapse" id="demo1">
@@ -355,6 +359,7 @@
                                         }
                                         @Html.Raw(map[LOS.LId].Text)
                                     </div>
+                                    
                                 </div>
                             </td>
 

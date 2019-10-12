@@ -84,7 +84,8 @@ namespace CS4540_A2.Controllers
                 map.Add(o.Note, new LOSNote()
                 {
                     Text = o.Text,
-                    IsProfessorNote = o.IsProfessorNote
+                    IsProfessorNote = o.IsProfessorNote,
+                    PostDate = o.Date
                 });
             }
 
