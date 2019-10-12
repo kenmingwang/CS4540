@@ -69,6 +69,26 @@ namespace CS4540_A2.Controllers
             var courseNote = await _context.CourseNotes.Where(c => c.CourseCId == course.CId).
                 OrderByDescending(n => n.PostDate).ToListAsync();
 
+            var LOSNotes =  await _context.LOSNotes.OrderByDescending(o => o.PostDate).GroupBy(g => g.LearningOutcomeLId).Select(s => 
+            new { 
+                s.Key,
+                Note = s.First().LearningOutcomeLId,
+                Text = s.First().Text,
+                Date = s.First().PostDate,
+                s.First().IsProfessorNote
+            }).ToListAsync();
+            
+            Dictionary<int, LOSNote> map = new Dictionary<int, LOSNote>();
+            foreach(var o in LOSNotes)
+            {
+                map.Add(o.Note, new LOSNote()
+                {
+                    Text = o.Text,
+                    IsProfessorNote = o.IsProfessorNote
+                });
+            }
+
+            ViewData["LOSNotes"] = map;
 
             if (courseNote.Count != 0)
             {
@@ -161,9 +181,9 @@ namespace CS4540_A2.Controllers
 
             return View(courses);
         }
-        public async Task<IActionResult> onPostSubmitNoteAsync([FromBody] CourseNoteData request)
+        public async Task<IActionResult> onPostSubmitNoteAsync([FromBody] NoteData request)
         {
-            var course = _context.Courses.Where(c => c.CId == request.CourseCId).FirstOrDefault();
+            var course = _context.Courses.Where(c => c.CId == request.FId).FirstOrDefault();
             if (course == null)
             {
                 return null;
@@ -208,18 +228,36 @@ namespace CS4540_A2.Controllers
             return StatusCode(200);
         }
 
+        public async Task<IActionResult> onPostLOSNoteAsync([FromBody] NoteData request)
+        {
+            LOSNote note = new LOSNote()
+            {
+                Text = request.Text,
+                PostDate = request.PostDate,
+                IsProfessorNote = User.IsInRole("Instructor"),
+                LearningOutcomeLId = request.FId
+            };
+
+            try
+            {
+                _context.LOSNotes.Add(note);
+                await _context.SaveChangesAsync();
+            }
+            catch (Exception exception)
+            {
+                Console.WriteLine(exception.ToString(), "An error occurred while saving this note.");
+                return StatusCode(405);
+            }
+            return StatusCode(200);
+        }
+
 
     }
-    public class CourseNoteData
+    public class NoteData
     {
         public string Text { get; set; }
         public DateTime PostDate { get; set; }
         public string ProfessorFullName { get; set; }
-        public int CourseCId { get; set; }
-    }
-
-    public class ApporvalData
-    {
-        public int id { get; set; }
+        public int FId { get; set; }
     }
 }

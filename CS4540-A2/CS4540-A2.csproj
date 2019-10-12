@@ -23,6 +23,8 @@
     <Compile Remove="Migrations\20191010233115_LOSContextMigration.Designer.cs" />
     <Compile Remove="Migrations\20191010234140_LOSContextMigration.cs" />
     <Compile Remove="Migrations\20191010234140_LOSContextMigration.Designer.cs" />
+    <Compile Remove="Migrations\20191011060033_LOSContextMigration.cs" />
+    <Compile Remove="Migrations\20191011060033_LOSContextMigration.Designer.cs" />
   </ItemGroup>
 
 

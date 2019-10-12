@@ -17,6 +17,7 @@ namespace CS4540_A2.Data
         public DbSet<LearningOutcome> LOS { get; set; }
 
         public DbSet<CourseNote> CourseNotes { get; set; }
+        public DbSet<LOSNote> LOSNotes { get; set; }
     }
    
 }

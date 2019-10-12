@@ -210,3 +210,11 @@ label {
     width:500px;
 }
 
+.save-btn{
+    min-width:120px !important;
+}
+
+.text-red{
+    color:orangered;
+}
+

@@ -71,6 +71,28 @@ namespace CS4540A2.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "LOSNotes",
+                columns: table => new
+                {
+                    LNId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    Text = table.Column<string>(maxLength: 350, nullable: true),
+                    PostDate = table.Column<DateTime>(nullable: false),
+                    IsProfessorNote = table.Column<bool>(nullable: false),
+                    LearningOutcomeLId = table.Column<int>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LOSNotes", x => x.LNId);
+                    table.ForeignKey(
+                        name: "FK_LOSNotes_LOS_LearningOutcomeLId",
+                        column: x => x.LearningOutcomeLId,
+                        principalTable: "LOS",
+                        principalColumn: "LId",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_CourseNotes_CourseCId",
                 table: "CourseNotes",
@@ -80,12 +102,20 @@ namespace CS4540A2.Migrations
                 name: "IX_LOS_CourseCId",
                 table: "LOS",
                 column: "CourseCId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_LOSNotes_LearningOutcomeLId",
+                table: "LOSNotes",
+                column: "LearningOutcomeLId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "CourseNotes");
+
+            migrationBuilder.DropTable(
+                name: "LOSNotes");
 
             migrationBuilder.DropTable(
                 name: "LOS");

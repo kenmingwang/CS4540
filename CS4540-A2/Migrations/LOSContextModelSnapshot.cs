@@ -75,6 +75,28 @@ namespace CS4540A2.Migrations
                     b.ToTable("CourseNotes");
                 });
 
+            modelBuilder.Entity("CS4540_A2.Models.LOSNote", b =>
+                {
+                    b.Property<int>("LNId")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<bool>("IsProfessorNote");
+
+                    b.Property<int>("LearningOutcomeLId");
+
+                    b.Property<DateTime>("PostDate");
+
+                    b.Property<string>("Text")
+                        .HasMaxLength(350);
+
+                    b.HasKey("LNId");
+
+                    b.HasIndex("LearningOutcomeLId");
+
+                    b.ToTable("LOSNotes");
+                });
+
             modelBuilder.Entity("CS4540_A2.Models.LearningOutcome", b =>
                 {
                     b.Property<int>("LId")
@@ -101,6 +123,14 @@ namespace CS4540A2.Migrations
                     b.HasOne("CS4540_A2.Models.Course", "Course")
                         .WithMany()
                         .HasForeignKey("CourseCId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("CS4540_A2.Models.LOSNote", b =>
+                {
+                    b.HasOne("CS4540_A2.Models.LearningOutcome", "LO")
+                        .WithMany()
+                        .HasForeignKey("LearningOutcomeLId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
