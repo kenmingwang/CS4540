@@ -1,4 +1,4 @@
-# CS4540 A4
+# CS4540 PS5
 
 
 ### Ken Wang 
@@ -7,21 +7,31 @@
 ---
 
 ## Note
-- There's no need to do any migrations or database-update before you start the program. It wil be done at runtime when the program starts.
-- For the Instructor test link, please use professor_mary@cs.utah.edu to test, since other instructor won't have access to mary's classes.
-- !!! PLEASE use the school network to test the Email functionality, it would require authentication if using the AnyConnet VPN.
-- In order to show the Collapsable function, in CourseList, the card besides the Fall-2019 one are still static, due to lack of seeding courses. Will consider adding more next assignment.
-- Progress bar now is still generated randomly, to show some variants of the table.
+- There's two courses that seeded with notes, can be found in homepage under the "DepartmentChair" column
+- User roles page can now actually change roles of users, user can also gain multiple roles or no roles.
+- Modified the course detail page to show Course notes and LOS notes. 
+    - Course notes:
+        1. Only Instructors can edit. It's a inline WYSIWYG editor so just click and edit, then save.
+        2. A tag on top will flag whether it's approved by a chair or not.
+        3. Chair can approve notes when there is a pending note to be approved.
+        4. Chair CANNOT edit course notes.
+    - LOS notes:
+        1. Click the "show comments" on the "Evalutaion Metric" column to see comments.
+        2. Both the class Instructor and chair is able to edit the inline note editor.
+        3. If the text in the note is red, it was lastly edited by a chair, else it's edited by Instructor.
+- Added a button for every course in DetailsProfessor page to redirect to the actual course detail page to see the notes.
+- Everything will be updated asynchronously.
 
 
-## Authentication and Authorization
+## Advanced Features Compeleted
 
-It's nice to have this membership system to handel password and login informations. Where it would take forever to make a secure password storing place if we need to do it our own. I found it interesting that most of the data stored in the User Tables are hashes, not literal values. Which means most of the things are "Secure" in most of the times. I am curious on how did they encode and decode those hashes, and I've took some really general overview readings about it. 
-
-For Autohorization, there's Role based, Claim based, and Policy based Authorizations. Which surprises me that there's that many different ways to do one simliar thing in one framwork. But since Role-based is what we're using, and it turns out to make the most sense to me after reading their introductions. Role-based is simple to understand and straight forward, while others like Claim-based can be used in different situations where we're not authorizing basing on the "Object" but part of the "Value" of the "Object". Which is really interesting to think about the use cases of it.
-
-And the really convinient thing I learned about .net core Authentication is that Even if you do a Authorize at the Class level, you can still make changes in the method level. This way you can expose some of the Actions in the controllers to the ones you want, which become pretty nice in a situtaion like this where the controllers are kind of used by many roles, but not just a single role.
-
+- :heavy_check_mark: (2pts) Date stamp the note and show this information next to the note.
+    - Datestamp and the person who edited is shown on the bottom right of the course note section.
+- :heavy_check_mark: (3pts) Allow a chair to approve the note and mark that it was seen.
+    - Chair will be able to approve notes that are pending.
+- :heavy_check_mark: Instead of a plain textarea, use a WYSIWYG editor. 
+    - Used CKEditor for the light-weighted inline rich-text fucntionality.
+-  :heavy_check_mark:
 
 ## Above and Beyond
 

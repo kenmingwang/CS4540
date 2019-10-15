@@ -11,235 +11,49 @@
     var isNull = @ViewData["Note"] == null;
     var text = @ViewData["Note"];
 }
-
+<script src="~/js/DetailPage.js"></script>
 <script>
-
-    function ToggleDnone(btn) {
-        if ($('#showBtn').text() === 'show comment') {
-            $('#showBtn').text('hide comment');
-        }
-        else {
-            $('#showBtn').text('show comment');
-        }
-        
-        if ($('[name="comment"]').hasClass('d-none')) {
-            $('[name="comment"]').removeClass('d-none');
-        }
-        else {
-            $('[name="comment"]').addClass('d-none');
-        }
+// Initialization
+$(function () {
+    CKEDITOR.disableAutoInline = true;
+    // Check if there's note
+    if ('@isNull' === 'False') {
+        $('#LastUpdateTime').html('&nbsp;' + 'on  @ViewData["NoteTime"]');
+        $('#LastUpdateName').text('Last updated by : @ViewData["ProfessorFullName"]');
     }
-    function ChangeBG() {
-        if ('@ViewData["Role"]' == 'Instructor') {
-            $('#editor1').addClass('bg-white');
-
-            if ('@isNull' === 'True') {
-                CKEDITOR.instances.editor1.setData('');
-            }
-        }
-        else {
-
-        }
-    }
-
-    function getDate() {
-        var date = new Date();
-        var day = date.getDate();       // yields date
-        var month = date.getMonth() + 1;    // yields month (add one as '.getMonth()' is zero indexed)
-        var year = date.getFullYear();  // yields year
-        var hour = date.getHours();     // yields hours
-        var minute = date.getMinutes(); // yields minutes
-        var second = date.getSeconds(); // yields seconds
-
-        // After this construct a string with the above results as below
-        return year + "/" + month + "/" + day + " " + hour + ':' + minute + ':' + second;
-    }
-
-    function AddNote() {
-        var time = getDate();
-
-        Swal.fire({
-            text: 'Are you sure to UPDATE this note? ',
-            showCancelButton: true,
-            confirmButtonText: 'Yes',
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                var text = CKEDITOR.instances.editor1.getData();
-                var note = JSON.stringify({
-                    'Text': text,
-                    'PostDate': time,
-                    'ProfessorFullName': '@fullname',
-                    'FId': '@course.CId'
-                });
-                console.log(note);
-                // Actual post to controller
-                $.ajax({
-                    url: '/Courses/onPostSubmitNoteAsync',
-                    data: note,
-                    contentType: 'application/json',
-                    type: 'POST',
-                    success: function (data) {
-                        Swal.fire(
-                            'Success!',
-                            'Your changes has been saved.',
-                            'success'
-                        );
-                        $('#Approval').removeClass();
-                        $('#Approval').addClass('badge badge-info d-inline');
-                        $('#Approval').html('Pending Approval');
-                        console.log(data);
-                    },
-                    error: function (xhr, status, error) {
-                        Swal.fire(
-                            'Failed!',
-                            'Somthing went wrong, please try again with less words!',
-                            'error'
-                        );
-                    }
-                })
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then(function (success) {
-            if (success.value) {
-                $('#LastUpdateTime').html('&nbsp;' + 'on ' + time);
-                $('#LastUpdateName').text('Last updated by : @fullname');
-                $('#editor1').removeClass('bg-white');
-            }
-        });
-    }
-
-    function ApproveNote() {
-        Swal.fire({
-            text: 'Are you sure to APPROVE this note? ',
-            showCancelButton: true,
-            confirmButtonText: 'Yes',
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                // Actual post to controller
-                $.ajax({
-                    url: '/Courses/onPostApproveNoteAsync?CNId=@ViewData["NoteId"]',
-                    contentType: 'application/json',
-                    type: 'POST',
-                    success: function (data) {
-                        Swal.fire(
-                            'Success!',
-                            'Your changes has been saved.',
-                            'success'
-                        );
-                             $('#Approval').removeClass();
-                             $('#Approval').addClass('badge badge-success d-inline');
-                             $('#Approval').html('Approved');
-                             $('#ApproveNoteBtn').attr('disabled',true);
-                    },
-                    error: function (xhr, status, error) {
-                        Swal.fire(
-                            'Failed!',
-                            'Somthing went wrong, please try again with less words!',
-                            'error'
-                        );
-                    }
-                })
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-        }).then(function (success) {
-            if (success.value) {
-            }
-        });
-    }
-    function AddComment(editor,commentTime, LId) {
-        Swal.fire({
-            text: 'Are you sure to UPDATE this note? ',
-            showCancelButton: true,
-            confirmButtonText: 'Yes',
-            showLoaderOnConfirm: true,
-            preConfirm: () => {
-                console.log(editor);
-                var date = getDate();
-                var isProfessor = '@User.IsInRole("Instructor")';
-                var text = CKEDITOR.instances[editor].getData();
-                var note = JSON.stringify({
-                    'Text': text,
-                    'PostDate': date,
-                    'ProfessorFullName': '@fullname',
-                    'FId': LId
-                });
-                console.log(note);
-                // Actual post to controller
-                $.ajax({
-                    url: '/Courses/onPostLOSNoteAsync',
-                    data: note,
-                    contentType: 'application/json',
-                    type: 'POST',
-                    success: function (data) {
-                        Swal.fire(
-                            'Success!',
-                            'Your changes has been saved.',
-                            'success'
-                        );
-                        console.log(data);
-                        if (isProfessor === 'False') {
-                            $('#' + editor).addClass('text-red');
-                        }
-                        else {
-                            $('#' + editor).removeClass('text-red');
-                        }
-                        $('#' + commentTime).text('Last edit: '+ date);
-                    },
-                    error: function (xhr, status, error) {
-                        Swal.fire(
-                            'Failed!',
-                            'Somthing went wrong, please try again with less words!',
-                            'error'
-                        );
-                    }
-                })
-            },
-            allowOutsideClick: () => !Swal.isLoading()
-        });
-    }
-
-    $(function () {
-        CKEDITOR.disableAutoInline = true;
-        // Check if there's note
-        if ('@isNull' === 'False') {
-            $('#LastUpdateTime').html('&nbsp;' + 'on  @ViewData["NoteTime"]');
-            $('#LastUpdateName').text('Last updated by : @ViewData["ProfessorFullName"]');
-        }
-        else {
-            if ('@ViewData["Role"]' == 'Chair') {
-                $('#Approval').addClass('badge-info')
-                $('#Approval').addClass('mt-6')
-                $('#Approval').html('Nothing to approve');
-                $('#ApproveNoteBtn').attr('disabled', true);
-             }
-        }
-
-        if ('@ViewData["Approval"]' === 'False') {
-
+    else {
+        if ('@ViewData["Role"]' == 'Chair') {
             $('#Approval').addClass('badge-info')
-            $('#Approval').html('Pending Approval');
+            $('#Approval').addClass('mt-6')
+            $('#Approval').html('Nothing to approve');
+            $('#ApproveNoteBtn').attr('disabled', true);
         }
-        else {
-            if ('@isNull' === 'False') {
-                $('#ApproveNoteBtn').addClass('disabled');
-                $('#Approval').addClass('badge badge-success')
-                $('#ApproveNoteBtn').attr('disabled',true);
-                $('#Approval').html('Approved');
-            }
+    }
+
+    if ('@ViewData["Approval"]' === 'False') {
+
+        $('#Approval').addClass('badge-info')
+        $('#Approval').html('Pending Approval');
+    }
+    else {
+        if ('@isNull' === 'False') {
+            $('#ApproveNoteBtn').addClass('disabled');
+            $('#Approval').addClass('badge badge-success')
+            $('#ApproveNoteBtn').attr('disabled', true);
+            $('#Approval').html('Approved');
         }
+    }
 
-        // Check the role of the current user
-        if ('@ViewData["Role"]' == 'Instructor') {
+    // Check the role of the current user
+    if ('@ViewData["Role"]' == 'Instructor') {
 
-            $('#SaveNoteBtn').removeClass('d-none');
-        }
-        else {
-
-
-            $('#ApproveNoteBtn').removeClass('d-none');
-            $('#editor1').attr('contenteditable',false);
-        }
-    });
+        $('#SaveNoteBtn').removeClass('d-none');
+    }
+    else {
+        $('#ApproveNoteBtn').removeClass('d-none');
+        $('#editor1').attr('contenteditable', false);
+    }
+});
 </script>
 
 
@@ -271,7 +85,7 @@
             <div class="card-footer">
                 <h4 class="card-title d-inline">Professor Note:</h4>
                 <span id="Approval" class="badge d-inline"></span>
-                <div id="editor1" class="border rounded p-2 mt-2" contenteditable="true" onclick="ChangeBG()">
+                <div id="editor1" class="border rounded p-2 mt-2" contenteditable="true" onclick="ChangeBG('@ViewData["Role"]' , '@isNull')">
                     @if (ViewData["Note"] != null)
                     {
                         @Html.Raw(text.ToString().Substring(0, text.ToString().Length - 1))
@@ -281,8 +95,8 @@
                         <p class="text-muted"><i>The note for this class is currently empty, click to edit and edit note...</i></p>
                     }
                 </div>
-                <button id="SaveNoteBtn" class="btn  mt-2 btn-primary d-none" onclick="AddNote()">Save</button>
-                <button id="ApproveNoteBtn" class="btn  mt-2 btn-primary d-none" onclick="ApproveNote()">Approve</button>
+                <button id="SaveNoteBtn" class="btn  mt-2 btn-primary d-none" onclick="AddNote('@fullname','@course.CId')">Save</button>
+                <button id="ApproveNoteBtn" class="btn  mt-2 btn-primary d-none" onclick="ApproveNote('@ViewData["NoteId"]')">Approve</button>
 
                 <p id="LastUpdateTime" class="d-inline float-right mt-4 text-muted">
                 </p>
@@ -302,7 +116,7 @@
                 </colgroup>
 
                 <thead>
-                    <tr   >
+                    <tr>
                         <th scope="col">
                             Learning Outcome
                         </th>
@@ -345,21 +159,39 @@
                             <td name="comment" colspan="1" class="d-none ">
                                 <p class="d-inline mt-2 ml-4 mb-0">LOS Comment: </p>
 
-                                <button id="SaveNoteBtn" class="btn btn-sm btn-primary save-btn ml-1 d-inline" onclick="AddComment('editor@(count+2)','lastEditComment@(count+2)', '@LOS.LId')">Save</button>
-                                <p id="lastEditComment@(count+2)" class="mt-2 ml-4 mb-0">Last edit: @map[LOS.LId].PostDate</p>
+                                <button id="SaveNoteBtn" class="btn btn-sm btn-primary save-btn ml-1 d-inline"
+                                        onclick="AddComment('editor@(count+2)', 'lastEditComment@(count+2)', '@LOS.LId', '@User.IsInRole("Instructor")', '@fullname')">
+                                    Save
+                                </button>
+                                @if (map.ContainsKey(LOS.LId))
+                                {
+                                    <p id="lastEditComment@(count+2)" class="mt-2 ml-4 mb-0">
+                                        Last Edit : @map[LOS.LId].PostDate
+                                    </p>
+                                }
+                                else
+                                {
+                                    <p id="lastEditComment@(count+2)" class="mt-2 ml-4 mb-0">
+                                        Edit and save for initial comment
+                                    </p>
+                                }
                             </td>
                             <td name="comment" colspan="2" class="d-none">
                                 <div class="accordian-body collapse" id="demo1">
-                                    <div id="editor@(count+2)" class="border rounded p-2 mt-2" contenteditable="true" onclick="ChangeBG()">
-                                        @if (!map[LOS.LId].IsProfessorNote)
+                                    <div id="editor@(count+2)" class="border rounded p-2 mt-2" contenteditable="true">
+                                        @if (map.ContainsKey(LOS.LId))
                                         {
-                                            <script>
+                                            @if (!map[LOS.LId].IsProfessorNote)
+                                            {
+                                                <script>
                                                     $('#editor@(count + 2)').addClass('text-red');
-                                            </script>
+                                                </script>
+                                            }
+                                            @Html.Raw(map[LOS.LId].Text)
                                         }
-                                        @Html.Raw(map[LOS.LId].Text)
+
                                     </div>
-                                    
+
                                 </div>
                             </td>
 
@@ -373,4 +205,5 @@
             </table>
         </div>
     </div>
+
 </div>

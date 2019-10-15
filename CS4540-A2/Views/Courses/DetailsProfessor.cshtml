@@ -4,7 +4,7 @@
 @{
     ViewData["Title"] = "DetailsProfessor";
     string pname = ViewData["Name"] as string;
-    var name =  UserNameAndRolesUtil.UserNameToActualName(pname);
+    var name = UserNameAndRolesUtil.UserNameToActualName(pname);
     List<Course> Courses = ViewData["Courses"] as List<Course>;
     var Ccount = 1;
 }
@@ -12,6 +12,7 @@
 <div>
     <h1 class="display-4">Professor @name[0] @name[1]'s LOS Courses</h1>
 </div>
+
 <div id="accordion">
     @foreach (Course c in Courses)
     {
@@ -26,7 +27,12 @@
                 </span> <span class="badge badge-pill badge-warning">Incomplete</span>
             </button>
 
+
             <div id="collapse@(Ccount)" class="collapse show" aria-labelledby="heading@(Ccount)" data-parent="#accordion">
+                <a asp-controller="Courses" asp-action="Details" asp-route-cid="@c.CId" target="_blank"
+                        class=" btn btn-secondary w-100" >
+                    Click to see Details of this course
+                </a>
                 <table class="table table-hover table-striped">
                     <thead>
                         <tr>
@@ -42,6 +48,8 @@
                         </tr>
                     </thead>
                     <tbody>
+                        <tr>
+                        </tr>
                         @foreach (LearningOutcome los in c.LOS)
                         {
                             <tr>

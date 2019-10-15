@@ -21,7 +21,7 @@
             @Role_Message.Substring(2, Role_Message.Length - 4)
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-            <a class="dropdown-item"asp-controller="Courses" asp-action="DetailsProfessor" asp-route-ProfessorUserName="@(username)">Your courses </a>
+            <a class="dropdown-item" asp-controller="Courses" asp-action="DetailsProfessor" asp-route-ProfessorUserName="@(username)">Your courses </a>
 
         </div>
     </li>
@@ -44,6 +44,7 @@
             @Role_Message.Substring(2, Role_Message.Length - 4)
         </a>
         <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item" asp-controller="Admin" asp-action="UserRoles"> User Roles </a>
             <a class="dropdown-item" asp-controller="Admin" asp-action="CourseIndex"> CRUD Courses </a>
             <a class="dropdown-item" asp-controller="Admin" asp-action="LOSIndex"> CRUD LOS </a>
         </div>

@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace CS4540_A2.Models
 {
-    
+
     public class LOSDbInitializer
     {
         [HttpPost]
@@ -341,13 +341,60 @@ namespace CS4540_A2.Models
                     Description = "Employ formal proof techniques (such as direct proof, proof by contradiction, induction, and the pigeonhole principle) to construct sound arguments about properties of numbers, sets, functions, relations, and graphs"
                 } };
             #endregion
-            #endregion
+
             foreach (LearningOutcome l in LOS)
             {
                 context.LOS.Add(l);
             }
             context.SaveChanges();
+            #endregion
 
+            #region CourseNote
+            CourseNote note = new CourseNote()
+            {
+                Text = "This is a seeded Course note for CS 4540.",
+                Course = context.Courses.Where(c => c.CId == 1).FirstOrDefault(),
+                CourseCId = 1,
+                PostDate = DateTime.Now,
+                IsApproved = false,
+                ProfessorFullName = "Jim Jerman"
+            };
+            CourseNote note2 = new CourseNote()
+            {
+                Text = "This is a seeded Course note for CS 2420.",
+                Course = context.Courses.Where(c => c.CId == 2).FirstOrDefault(),
+                CourseCId = 2,
+                PostDate = DateTime.Now,
+                IsApproved = true,
+                ProfessorFullName = "Jim Jerman"
+            };
+            context.CourseNotes.Add(note);
+            context.CourseNotes.Add(note2);
+            context.SaveChanges();
+
+            #endregion
+
+            #region LOSNote
+            LOSNote lnote = new LOSNote()
+            {
+                Text = "This is a seeded LOS note for CS 4540.",
+                LearningOutcomeLId = context.LOS.Where(l => l.CourseCId == 1).FirstOrDefault().LId,
+                PostDate = DateTime.Now,
+                IsProfessorNote = true,
+            };
+            LOSNote lnote2 = new LOSNote()
+            {
+                Text = "This is a seeded LOS note for CS 4540.",
+                LearningOutcomeLId = context.LOS.Where(l => l.CourseCId == 2).FirstOrDefault().LId,
+                PostDate = DateTime.Now,
+                IsProfessorNote = false,
+            };
+
+            context.LOSNotes.Add(lnote);
+            context.LOSNotes.Add(lnote2);
+            context.SaveChanges();
+
+            #endregion
         }
     }
 }
