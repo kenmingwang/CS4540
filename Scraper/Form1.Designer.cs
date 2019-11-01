@@ -47,6 +47,7 @@
             this.FindEnrollmentBtn.TabIndex = 0;
             this.FindEnrollmentBtn.Text = "Find Enrollments";
             this.FindEnrollmentBtn.UseVisualStyleBackColor = true;
+            this.FindEnrollmentBtn.Click += new System.EventHandler(this.FindEnrollmentBtn_Click);
             // 
             // LimitToBox
             // 
@@ -93,9 +94,24 @@
             // YearBox
             // 
             this.YearBox.Location = new System.Drawing.Point(125, 65);
+            this.YearBox.Maximum = new decimal(new int[] {
+            2100,
+            0,
+            0,
+            0});
+            this.YearBox.Minimum = new decimal(new int[] {
+            1900,
+            0,
+            0,
+            0});
             this.YearBox.Name = "YearBox";
             this.YearBox.Size = new System.Drawing.Size(125, 27);
             this.YearBox.TabIndex = 8;
+            this.YearBox.Value = new decimal(new int[] {
+            1900,
+            0,
+            0,
+            0});
             // 
             // label4
             // 
@@ -143,22 +159,6 @@
         private System.Windows.Forms.ListBox EnrollmentConsole;
 
         #endregion
-
-
-        //private System.Windows.Forms.Button FindEnrollmentBtn;
-        //private System.Windows.Forms.Button FindCourseBtn;
-        //private System.Windows.Forms.Label label1;
-        //private System.Windows.Forms.Label label2;
-        //private System.Windows.Forms.ComboBox SemesterCombo;
-        //private System.Windows.Forms.NumericUpDown YearBoxUpDown;
-        //private System.Windows.Forms.Label label3;
-        //private System.Windows.Forms.TreeView treeView1;
-        //private System.Windows.Forms.TextBox textBox2;
-        //private System.Windows.Forms.TextBox textBox3;
-        //private System.Windows.Forms.Label label4;
-        //private System.Windows.Forms.Label label5;
-        //private System.Windows.Forms.Button button1;
-        //private System.Windows.Forms.TextBox textBox1;
     }
 }
 
