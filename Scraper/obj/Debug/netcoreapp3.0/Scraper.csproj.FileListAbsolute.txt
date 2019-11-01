@@ -1,0 +1,14 @@
+C:\Users\fengf\source\repos\Scraper\Scraper\bin\Debug\netcoreapp3.0\Scraper.exe
+C:\Users\fengf\source\repos\Scraper\Scraper\bin\Debug\netcoreapp3.0\Scraper.deps.json
+C:\Users\fengf\source\repos\Scraper\Scraper\bin\Debug\netcoreapp3.0\Scraper.runtimeconfig.json
+C:\Users\fengf\source\repos\Scraper\Scraper\bin\Debug\netcoreapp3.0\Scraper.runtimeconfig.dev.json
+C:\Users\fengf\source\repos\Scraper\Scraper\bin\Debug\netcoreapp3.0\Scraper.dll
+C:\Users\fengf\source\repos\Scraper\Scraper\bin\Debug\netcoreapp3.0\Scraper.pdb
+C:\Users\fengf\source\repos\Scraper\Scraper\obj\Debug\netcoreapp3.0\Scraper.csprojAssemblyReference.cache
+C:\Users\fengf\source\repos\Scraper\Scraper\obj\Debug\netcoreapp3.0\Scraper.AssemblyInfoInputs.cache
+C:\Users\fengf\source\repos\Scraper\Scraper\obj\Debug\netcoreapp3.0\Scraper.AssemblyInfo.cs
+C:\Users\fengf\source\repos\Scraper\Scraper\obj\Debug\netcoreapp3.0\Scraper.dll
+C:\Users\fengf\source\repos\Scraper\Scraper\obj\Debug\netcoreapp3.0\Scraper.pdb
+C:\Users\fengf\source\repos\Scraper\Scraper\bin\Debug\netcoreapp3.0\Newtonsoft.Json.dll
+C:\Users\fengf\source\repos\Scraper\Scraper\bin\Debug\netcoreapp3.0\WebDriver.dll
+C:\Users\fengf\source\repos\Scraper\Scraper\obj\Debug\netcoreapp3.0\Scraper.csproj.CopyComplete
