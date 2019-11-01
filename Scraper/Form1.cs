@@ -92,37 +92,38 @@ namespace Scraper
                             {
                                 //Filter out the components , <tr> that fits the filter
                                 var filter = ConfigurationManager.AppSettings["Filters"].Split(',');
-                                richTextBox1.AppendText(d.Text + "\n");
+                                // richTextBox1.AppendText(number.ToString());
                                 var tmpParent = d.FindElement(By.XPath("./parent::*"));
                                 var l = tmpParent.FindElements(By.TagName("td"));
-                                foreach (var c in l)
-                                {
-                                    richTextBox1.AppendText( ",");
-                                }
+                                //foreach (var c in l)
+                                //{
+                                  richTextBox1.AppendText(l[2].Text + ", " + l[3].Text +  ", " + l[4].Text + ", " + l[5].Text);
+                                //}
+                                richTextBox1.AppendText("\n");
 
                                 // Ones that does not need
-                                var f = tmpParent.FindElements(By.XPath("//td[contains(text(),'" + filter[0] + "')" +
-                                    " or contains(text(),'" + filter[1] + "')]"));
+                                //var f = tmpParent.FindElements(By.XPath("//td[contains(text(),'" + filter[0] + "')]"));
+                                  // + " or contains(text(),'" + filter[1] + "')]"));
 
                                 // if f did not find any thing, then it's the final filtered version
-                               if(f.Count == 0)
-                                {
-                                    filteredRows.Add(tmpParent);
-                                }
+                                //if (f.Count == 0)
+                                //{
+                                //    filteredRows.Add(tmpParent);
+                                //}
 
                             }
                         }
                     }
 
-                    foreach (var r in filteredRows)
-                    {
-                        IReadOnlyList<IWebElement> childs = r.FindElements(By.XPath(".//*"));
-                        foreach(var c in childs)
-                        {
-                            richTextBox1.AppendText(c.Text + ",");
-                        }
-                        richTextBox1.AppendText("\n");
-                    }
+                    //foreach (var r in filteredRows)
+                    //{
+                    //    IReadOnlyList<IWebElement> childs = r.FindElements(By.XPath(".//*"));
+                    //    foreach(var c in childs)
+                    //    {
+                    //        richTextBox1.AppendText(c.Text + ",");
+                    //    }
+                    //    richTextBox1.AppendText("\n");
+                    //}
                 }
                 catch (Exception ex)
                 {
@@ -150,6 +151,10 @@ namespace Scraper
             }
         }
 
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
