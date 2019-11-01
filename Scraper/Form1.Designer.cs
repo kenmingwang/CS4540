@@ -28,35 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.button1 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.FindEnrollmentBtn = new System.Windows.Forms.Button();
+            this.LimitToBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            this.SemesterBox = new System.Windows.Forms.ComboBox();
+            this.YearBox = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.EnrollmentConsole = new System.Windows.Forms.ListBox();
+            ((System.ComponentModel.ISupportInitialize)(this.YearBox)).BeginInit();
             // 
-            // button1
+            // FindEnrollmentBtn
             // 
-            this.button1.Location = new System.Drawing.Point(146, 184);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(94, 29);
-            this.button1.TabIndex = 0;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.FindEnrollmentBtn.Location = new System.Drawing.Point(41, 140);
+            this.FindEnrollmentBtn.Name = "FindEnrollmentBtn";
+            this.FindEnrollmentBtn.Size = new System.Drawing.Size(282, 29);
+            this.FindEnrollmentBtn.TabIndex = 0;
+            this.FindEnrollmentBtn.Text = "Find Enrollments";
+            this.FindEnrollmentBtn.UseVisualStyleBackColor = true;
             // 
-            // textBox2
+            // LimitToBox
             // 
-            this.textBox2.Location = new System.Drawing.Point(146, 151);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(125, 27);
-            this.textBox2.TabIndex = 2;
+            this.LimitToBox.Location = new System.Drawing.Point(125, 107);
+            this.LimitToBox.Name = "LimitToBox";
+            this.LimitToBox.Size = new System.Drawing.Size(125, 27);
+            this.LimitToBox.TabIndex = 2;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(44, 66);
+            this.label1.Location = new System.Drawing.Point(41, 27);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 20);
             this.label1.TabIndex = 4;
@@ -65,7 +67,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(44, 109);
+            this.label2.Location = new System.Drawing.Point(78, 67);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 20);
             this.label2.TabIndex = 5;
@@ -74,49 +76,71 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(44, 147);
+            this.label3.Location = new System.Drawing.Point(54, 110);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 20);
+            this.label3.Size = new System.Drawing.Size(65, 20);
             this.label3.TabIndex = 6;
-            this.label3.Text = "label3";
+            this.label3.Text = "Limit to";
             // 
-            // comboBox1
+            // SemesterBox
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(146, 68);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(125, 28);
-            this.comboBox1.TabIndex = 7;
+            this.SemesterBox.FormattingEnabled = true;
+            this.SemesterBox.Location = new System.Drawing.Point(125, 24);
+            this.SemesterBox.Name = "SemesterBox";
+            this.SemesterBox.Size = new System.Drawing.Size(125, 28);
+            this.SemesterBox.TabIndex = 7;
             // 
-            // numericUpDown1
+            // YearBox
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(146, 109);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(125, 27);
-            this.numericUpDown1.TabIndex = 8;
+            this.YearBox.Location = new System.Drawing.Point(125, 65);
+            this.YearBox.Name = "YearBox";
+            this.YearBox.Size = new System.Drawing.Size(125, 27);
+            this.YearBox.TabIndex = 8;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(256, 110);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(67, 20);
+            this.label4.TabIndex = 9;
+            this.label4.Text = "Courses";
+            // 
+            // EnrollmentConsole
+            // 
+            this.EnrollmentConsole.FormattingEnabled = true;
+            this.EnrollmentConsole.ItemHeight = 20;
+            this.EnrollmentConsole.Location = new System.Drawing.Point(41, 196);
+            this.EnrollmentConsole.Name = "EnrollmentConsole";
+            this.EnrollmentConsole.Size = new System.Drawing.Size(282, 104);
+            this.EnrollmentConsole.TabIndex = 10;
             // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(666, 338);
-            this.Controls.Add(this.numericUpDown1);
-            this.Controls.Add(this.comboBox1);
+            this.Controls.Add(this.EnrollmentConsole);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.YearBox);
+            this.Controls.Add(this.SemesterBox);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.LimitToBox);
+            this.Controls.Add(this.FindEnrollmentBtn);
             this.Name = "Form1";
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.YearBox)).EndInit();
 
         }
 
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button FindEnrollmentBtn;
+        private System.Windows.Forms.TextBox LimitToBox;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
+        private System.Windows.Forms.ComboBox SemesterBox;
+        private System.Windows.Forms.NumericUpDown YearBox;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListBox EnrollmentConsole;
 
         #endregion
 
