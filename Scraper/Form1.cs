@@ -74,11 +74,57 @@ namespace Scraper
                         "//a[contains(text(),'" + ConfigurationManager.AppSettings["SeatingAvailibilityLinkText"] + "')]"));
                     driver.Navigate().GoToUrl(link.GetAttribute("href"));
                     // Filter out needed sections
-                    var td = driver.FindElement(By.XPath("//td[contains(text()"+
+                    var td = driver.FindElements(By.XPath("//td[contains(text(),'" +
                         ConfigurationManager.AppSettings["ConsiderSection"] + "')]"));
-                    foreach (var col)
+
+                    List<IWebElement> filteredRows = new List<IWebElement>();
+                    foreach (var child in td)
+                    {
+                        var parent = child.FindElement(By.XPath("./parent::*")); // <tr> that is sec 001
+                        var cols = parent.FindElements(By.TagName("td")); //re-dive into the <tr> to filter course numbers
+
+                        // Filter out the correct course numbers, <td>s in a <tr> that fits the course number constraint
+                        foreach (var d in cols)
+                        {
+                            int number = TryToParse(d.Text);
+                            if (number <= TryToParse(ConfigurationManager.AppSettings["CourseRangeEnd"]) &&
+                                number >= TryToParse(ConfigurationManager.AppSettings["CourseRangeStart"]))
+                            {
+                                //Filter out the components , <tr> that fits the filter
+                                var filter = ConfigurationManager.AppSettings["Filters"].Split(',');
+                                richTextBox1.AppendText(d.Text + "\n");
+                                var tmpParent = d.FindElement(By.XPath("./parent::*"));
+                                var l = tmpParent.FindElements(By.TagName("td"));
+                                foreach (var c in l)
+                                {
+                                    richTextBox1.AppendText( ",");
+                                }
+
+                                // Ones that does not need
+                                var f = tmpParent.FindElements(By.XPath("//td[contains(text(),'" + filter[0] + "')" +
+                                    " or contains(text(),'" + filter[1] + "')]"));
+
+                                // if f did not find any thing, then it's the final filtered version
+                               if(f.Count == 0)
+                                {
+                                    filteredRows.Add(tmpParent);
+                                }
+
+                            }
+                        }
+                    }
+
+                    foreach (var r in filteredRows)
+                    {
+                        IReadOnlyList<IWebElement> childs = r.FindElements(By.XPath(".//*"));
+                        foreach(var c in childs)
+                        {
+                            richTextBox1.AppendText(c.Text + ",");
+                        }
+                        richTextBox1.AppendText("\n");
+                    }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
 
                 }

@@ -36,7 +36,7 @@
             this.SemesterBox = new System.Windows.Forms.ComboBox();
             this.YearBox = new System.Windows.Forms.NumericUpDown();
             this.label4 = new System.Windows.Forms.Label();
-            this.EnrollmentConsole = new System.Windows.Forms.ListBox();
+            this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             ((System.ComponentModel.ISupportInitialize)(this.YearBox)).BeginInit();
             // 
             // FindEnrollmentBtn
@@ -127,19 +127,18 @@
             this.label4.TabIndex = 9;
             this.label4.Text = "Courses";
             // 
-            // EnrollmentConsole
+            // richTextBox1
             // 
-            this.EnrollmentConsole.FormattingEnabled = true;
-            this.EnrollmentConsole.ItemHeight = 20;
-            this.EnrollmentConsole.Location = new System.Drawing.Point(41, 196);
-            this.EnrollmentConsole.Name = "EnrollmentConsole";
-            this.EnrollmentConsole.Size = new System.Drawing.Size(282, 104);
-            this.EnrollmentConsole.TabIndex = 10;
+            this.richTextBox1.Location = new System.Drawing.Point(41, 192);
+            this.richTextBox1.Name = "richTextBox1";
+            this.richTextBox1.Size = new System.Drawing.Size(578, 120);
+            this.richTextBox1.TabIndex = 10;
+            this.richTextBox1.Text = "";
             // 
             // Form1
             // 
             this.ClientSize = new System.Drawing.Size(666, 338);
-            this.Controls.Add(this.EnrollmentConsole);
+            this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.YearBox);
             this.Controls.Add(this.SemesterBox);
@@ -161,9 +160,10 @@
         private System.Windows.Forms.ComboBox SemesterBox;
         private System.Windows.Forms.NumericUpDown YearBox;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.ListBox EnrollmentConsole;
 
         #endregion
+
+        private System.Windows.Forms.RichTextBox richTextBox1;
     }
 }
 
