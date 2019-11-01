@@ -55,6 +55,7 @@
             this.LimitToBox.Name = "LimitToBox";
             this.LimitToBox.Size = new System.Drawing.Size(125, 27);
             this.LimitToBox.TabIndex = 2;
+            this.LimitToBox.Text = "100";
             // 
             // label1
             // 
@@ -86,6 +87,10 @@
             // SemesterBox
             // 
             this.SemesterBox.FormattingEnabled = true;
+            this.SemesterBox.Items.AddRange(new object[] {
+            "Spring",
+            "Fall",
+            "Summer"});
             this.SemesterBox.Location = new System.Drawing.Point(125, 24);
             this.SemesterBox.Name = "SemesterBox";
             this.SemesterBox.Size = new System.Drawing.Size(125, 28);
@@ -108,7 +113,7 @@
             this.YearBox.Size = new System.Drawing.Size(125, 27);
             this.YearBox.TabIndex = 8;
             this.YearBox.Value = new decimal(new int[] {
-            1900,
+            2019,
             0,
             0,
             0});

@@ -1,4 +1,6 @@
-﻿using OpenQA.Selenium.Chrome;
+﻿using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
+using OpenQA.Selenium.Support.UI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -37,6 +39,7 @@ namespace Scraper
 
         private void FindEnrollmentBtn_Click(object sender, EventArgs e)
         {
+            // Make sure every box has a value
             if (SemesterBox.Text != "" && YearBox.Text != "" && LimitToBox.Text != "")
             {
                 int year = TryToParse(YearBox.Text);
@@ -62,7 +65,23 @@ namespace Scraper
                 var url = ConfigurationManager.AppSettings["ClassScheduleUrl"] + urlPram + ConfigurationManager.AppSettings["EndUrl"];
 
                 InitializeDriver();
-                driver.Navigate().GoToUrl(url);
+
+                // This will catch any timeExceed > 5 sec, and not foundElement exception
+                try
+                {
+                    driver.Navigate().GoToUrl(url);
+                    var link = driver.FindElement(By.XPath(
+                        "//a[contains(text(),'" + ConfigurationManager.AppSettings["SeatingAvailibilityLinkText"] + "')]"));
+                    driver.Navigate().GoToUrl(link.GetAttribute("href"));
+                    // Filter out needed sections
+                    var td = driver.FindElement(By.XPath("//td[contains(text()"+
+                        ConfigurationManager.AppSettings["ConsiderSection"] + "')]"));
+                    foreach (var col)
+                }
+                catch(Exception ex)
+                {
+
+                }
 
             }
             else
@@ -85,5 +104,20 @@ namespace Scraper
             }
         }
 
+    }
+}
+
+// reference: https://stackoverflow.com/questions/6992993/selenium-c-sharp-webdriver-wait-until-element-is-present
+// Author: Loudenvier
+public static class WebDriverExtensions
+{
+    public static IWebElement FindElement(this IWebDriver driver, By by, int timeoutInSeconds)
+    {
+        if (timeoutInSeconds > 0)
+        {
+            var wait = new WebDriverWait(driver, TimeSpan.FromSeconds(timeoutInSeconds));
+            return wait.Until(drv => drv.FindElement(by));
+        }
+        return driver.FindElement(by);
     }
 }
