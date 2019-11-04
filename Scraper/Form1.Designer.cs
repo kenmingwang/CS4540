@@ -41,7 +41,7 @@
             // 
             // FindEnrollmentBtn
             // 
-            this.FindEnrollmentBtn.Location = new System.Drawing.Point(41, 140);
+            this.FindEnrollmentBtn.Location = new System.Drawing.Point(58, 180);
             this.FindEnrollmentBtn.Name = "FindEnrollmentBtn";
             this.FindEnrollmentBtn.Size = new System.Drawing.Size(282, 29);
             this.FindEnrollmentBtn.TabIndex = 0;
@@ -51,7 +51,7 @@
             // 
             // LimitToBox
             // 
-            this.LimitToBox.Location = new System.Drawing.Point(125, 107);
+            this.LimitToBox.Location = new System.Drawing.Point(137, 134);
             this.LimitToBox.Name = "LimitToBox";
             this.LimitToBox.Size = new System.Drawing.Size(125, 27);
             this.LimitToBox.TabIndex = 2;
@@ -60,7 +60,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 27);
+            this.label1.Location = new System.Drawing.Point(53, 51);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(78, 20);
             this.label1.TabIndex = 4;
@@ -69,7 +69,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(78, 67);
+            this.label2.Location = new System.Drawing.Point(90, 91);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 20);
             this.label2.TabIndex = 5;
@@ -78,7 +78,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(54, 110);
+            this.label3.Location = new System.Drawing.Point(66, 134);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(65, 20);
             this.label3.TabIndex = 6;
@@ -91,14 +91,14 @@
             "Spring",
             "Fall",
             "Summer"});
-            this.SemesterBox.Location = new System.Drawing.Point(125, 24);
+            this.SemesterBox.Location = new System.Drawing.Point(137, 48);
             this.SemesterBox.Name = "SemesterBox";
             this.SemesterBox.Size = new System.Drawing.Size(125, 28);
             this.SemesterBox.TabIndex = 7;
             // 
             // YearBox
             // 
-            this.YearBox.Location = new System.Drawing.Point(125, 65);
+            this.YearBox.Location = new System.Drawing.Point(137, 89);
             this.YearBox.Maximum = new decimal(new int[] {
             2100,
             0,
@@ -121,7 +121,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(256, 110);
+            this.label4.Location = new System.Drawing.Point(268, 134);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(67, 20);
             this.label4.TabIndex = 9;
@@ -129,16 +129,16 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(41, 192);
+            this.richTextBox1.Location = new System.Drawing.Point(41, 234);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(569, 120);
+            this.richTextBox1.Size = new System.Drawing.Size(900, 499);
             this.richTextBox1.TabIndex = 10;
             this.richTextBox1.Text = "";
             this.richTextBox1.TextChanged += new System.EventHandler(this.richTextBox1_TextChanged);
             // 
             // Form1
             // 
-            this.ClientSize = new System.Drawing.Size(666, 338);
+            this.ClientSize = new System.Drawing.Size(982, 753);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.YearBox);
@@ -148,6 +148,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.LimitToBox);
             this.Controls.Add(this.FindEnrollmentBtn);
+            this.MaximumSize = new System.Drawing.Size(1000, 800);
+            this.MinimumSize = new System.Drawing.Size(1000, 800);
             this.Name = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.YearBox)).EndInit();
 
