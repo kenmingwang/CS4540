@@ -40,6 +40,7 @@ namespace Scraper
         {
             driver.Close();
             driver.Dispose();
+            driver = null;
         }
 
         public void ClearCache()
@@ -161,6 +162,7 @@ namespace Scraper
                 view.ConsoleOutput(ex.Message);
 
             }
+            DestroyDriver();
             view.ConsoleOutput("-------------------------------------------------");
             view.ConsoleOutput("Search done...Click save to save in csv format");
             view.ActivateSaveBtn(true);
@@ -253,9 +255,9 @@ namespace Scraper
             {
                 view.ConsoleOutput("Something is wrong with the input! Please try again!");
             }
-
-            view.ConsoleOutput("Search done...");
             view.ConsoleOutput("-------------------------------------------------");
+            view.ConsoleOutput("Search done...");
+            DestroyDriver();
 
         }
 
