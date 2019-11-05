@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\fengf\\source\\repos\\Scraper\\Scraper\\Scraper.csproj": {}
+    "C:\\Users\\fengf\\source\\repos\\Csharp\\CS4540\\Scraper\\Scraper.csproj": {}
   },
   "projects": {
-    "C:\\Users\\fengf\\source\\repos\\Scraper\\Scraper\\Scraper.csproj": {
+    "C:\\Users\\fengf\\source\\repos\\Csharp\\CS4540\\Scraper\\Scraper.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\fengf\\source\\repos\\Scraper\\Scraper\\Scraper.csproj",
+        "projectUniqueName": "C:\\Users\\fengf\\source\\repos\\Csharp\\CS4540\\Scraper\\Scraper.csproj",
         "projectName": "Scraper",
-        "projectPath": "C:\\Users\\fengf\\source\\repos\\Scraper\\Scraper\\Scraper.csproj",
+        "projectPath": "C:\\Users\\fengf\\source\\repos\\Csharp\\CS4540\\Scraper\\Scraper.csproj",
         "packagesPath": "C:\\Users\\fengf\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\fengf\\source\\repos\\Scraper\\Scraper\\obj\\",
+        "outputPath": "C:\\Users\\fengf\\source\\repos\\Csharp\\CS4540\\Scraper\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
